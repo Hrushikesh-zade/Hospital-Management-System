@@ -181,4 +181,12 @@ public class PatientServiceImpl implements PatientService {
 		return "Doctor with DoctorID:"+d.getDoctorId()+" has been successfully assigned to Patient with patientId:"+p.getPatientId();
 	}
 
+	@Override
+	public Integer findPatientIdByUserId(Integer userId) {
+		
+		Patient p = repo.findByUserUserId(userId).orElseThrow(()->new ResourceNotFoundException("patient not found"));
+		
+		return p.getPatientId();
+	}
+
 }

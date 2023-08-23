@@ -26,4 +26,6 @@ public interface PatientService {
 	List<DoctorResponseDto> getAllDoctors(Integer patientId);
 	
 	String assignDoctor(Integer patientId,Integer doctorId);
+	
+	Integer findPatientIdByUserId(Integer userId);
 }

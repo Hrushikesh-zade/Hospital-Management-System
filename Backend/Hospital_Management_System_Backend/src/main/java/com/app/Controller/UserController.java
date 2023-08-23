@@ -14,14 +14,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.Repository.DoctorRepository;
+import com.app.Repository.EmployeeRepository;
+import com.app.Repository.PatientRepository;
 import com.app.Repository.UserRepository;
 import com.app.dto.ApiResponse;
 import com.app.dto.LoginRequestDto;
 import com.app.entities.User;
 import com.app.exception_handler.ResourceNotFoundException;
+import com.app.service.DoctorService;
+import com.app.service.EmployeeService;
+import com.app.service.PatientService;
 import com.app.service.UserService;
 
 import lombok.NoArgsConstructor;
+import static com.app.dto.UserResponseDto.createSingleUser;
+
 
 @RestController
 @RequestMapping("/users")
@@ -35,6 +43,17 @@ public class UserController {
 	@Autowired
 	private UserRepository repo;
 	
+	@Autowired
+	private EmployeeService empService;
+	
+	@Autowired
+	private DoctorService docService;
+	
+	@Autowired
+	private PatientService patientService;
+	
+
+	
 //	@Autowired
 //	private PasswordEncoder encoder;
 	
@@ -46,11 +65,33 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<?> getUserDetails(@RequestBody LoginRequestDto dto){
 		
+		Integer roleId;
+		
 		User u = repo.findByEmail(dto.getEmail()).orElseThrow(()->new ResourceNotFoundException("user not found"));
 		
 		//User u = service.getUserByEmailAndPassword(dto.getEmail(), dto.getPassword());
 		if(encoder.matches(dto.getPassword(),u.getPassword())) {
-			return new ResponseEntity<>(u, HttpStatus.OK);
+			
+			if((u.getRole().name().equals("ADMIN")) || (u.getRole().name().equals("RECEPTIONIST")) || (u.getRole().name().equals("ACCOUNTANT"))) {
+				roleId = empService.findEmpIdByUserId(u.getUserId());
+				
+				return new ResponseEntity<>(createSingleUser(u, roleId), HttpStatus.OK);
+				
+			}
+			else if(u.getRole().name().equals("PATIENT")) {
+				roleId = patientService.findPatientIdByUserId(u.getUserId());
+				return new ResponseEntity<>(createSingleUser(u, roleId), HttpStatus.OK);
+			}
+			else if(u.getRole().name().equals("DOCTOR")){
+				roleId = docService.getDoctorIdByUserId(u.getUserId());
+				return new ResponseEntity<>(createSingleUser(u, roleId), HttpStatus.OK);
+			}
+			else {
+				throw new ResourceNotFoundException("role does not found");
+			}
+			
+			
+			
 		}
 		else {
 			throw new ResourceNotFoundException("password incorrect");

@@ -33,6 +33,6 @@ public interface DoctorService {
 	
 	List<PatientResponseDto> getAllPatients(Integer doctorId);
 	
-	
+	Integer getDoctorIdByUserId(Integer userId);
 	
 }

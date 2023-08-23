@@ -20,4 +20,6 @@ public interface EmployeeService {
 	List<EmployeeResponseDto> displayEmployees();
 
 	String updateEmployee(Integer empId,EmployeeEditDto emp);
+	
+	Integer findEmpIdByUserId(Integer userId);
 }

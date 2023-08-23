@@ -93,12 +93,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		return createEmployee(list);
 	}
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public String updateEmployee(Integer empId,EmployeeEditDto emp) {
 		// TODO Auto-generated method stub
 		
-		Employee e = repo.findById(empId).orElseThrow();
+		Employee e = repo.findById(empId).orElseThrow(()-> new ResourceNotFoundException("employee not found"));
 		
 		e.setHiringDate(emp.getHiringDate());
 		e.setSalary(emp.getSalary());
@@ -115,6 +121,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		return "employee with empId: "+ e.getEmpId()+" updated successfully" ;
 		
+	}
+
+	@Override
+	public Integer findEmpIdByUserId(Integer userId) {
+		
+		Employee e = repo.findByUserUserId(userId).orElseThrow(()-> new ResourceNotFoundException("employee not found"));
+		
+		
+		
+		return e.getEmpId();
 	}
 
 }

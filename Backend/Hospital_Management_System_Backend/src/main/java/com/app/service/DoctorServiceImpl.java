@@ -135,4 +135,12 @@ public class DoctorServiceImpl implements DoctorService {
 		return createPatient(d.getPatients());
 	}
 
+	@Override
+	public Integer getDoctorIdByUserId(Integer userId) {
+		
+		Doctor d = repo.findByEmployeeUserUserId(userId).orElseThrow(()-> new ResourceNotFoundException("doctor not found"));
+		
+		return d.getDoctorId();
+	}
+
 }

@@ -57,7 +57,7 @@ public class WebSecurityConfig {
 																										// /auth
 				// only required for JS clnts (react / angular)
 		.antMatchers(HttpMethod.OPTIONS).permitAll().
-		anyRequest().authenticated().
+		//anyRequest().authenticated().
 		and().
 		sessionManagement()
 		.sessionCreationPolicy(SessionCreationPolicy.STATELESS).
