@@ -17,6 +17,7 @@ import com.app.dto.PatientResponseDto;
 import com.app.dto.UserDto;
 import com.app.entities.Doctor;
 import com.app.entities.Patient;
+import com.app.entities.Status;
 import com.app.entities.User;
 import com.app.entities.Ward;
 import com.app.exception_handler.ResourceNotFoundException;
@@ -99,23 +100,36 @@ public class PatientServiceImpl implements PatientService {
 		return createPatient(list);
 	}
 
+//	@Override
+//	public String removePatient(Integer patientId) {
+//		// TODO Auto-generated method stub
+//		
+//		Patient p = repo.findById(patientId).orElseThrow(()->new ResourceNotFoundException("invalid patient id"));
+//		
+//		Ward w = wardRepo.findById(p.getWard().getWardId()).orElseThrow(()->new ResourceNotFoundException("invalid ward id"));
+//			
+//		for(Doctor d : p.getDoctors()) {
+//			d.removePatient(p);
+//		}
+//		
+//		w.removePatient(p);
+//		
+//		repo.delete(p);
+//		
+//		return "Patient deleted having id:"+p.getPatientId();
+//	}
+	
 	@Override
 	public String removePatient(Integer patientId) {
 		// TODO Auto-generated method stub
 		
+		Status status = Status.valueOf("INACTIVE");
+		
 		Patient p = repo.findById(patientId).orElseThrow(()->new ResourceNotFoundException("invalid patient id"));
 		
-		Ward w = wardRepo.findById(p.getWard().getWardId()).orElseThrow(()->new ResourceNotFoundException("invalid ward id"));
-			
-		for(Doctor d : p.getDoctors()) {
-			d.removePatient(p);
-		}
+		 p.getUser().setStatus(status);
 		
-		w.removePatient(p);
-		
-		repo.delete(p);
-		
-		return "Patient deleted having id:"+p.getPatientId();
+		return "Patient deleted";
 	}
 
 	@Override
@@ -135,6 +149,7 @@ public class PatientServiceImpl implements PatientService {
 		p.setDisease(pt.getDisease());
 		p.setPrescription(pt.getPrescription());
 		p.setPaymentStatus(pt.getPaymentStatus());
+		p.getUser().setStatus(pt.getStatus());
 		p.setWard(wardRepo.findById(pt.getWardId()).orElseThrow(()->new ResourceNotFoundException("invalid ward id")));
 	
 		

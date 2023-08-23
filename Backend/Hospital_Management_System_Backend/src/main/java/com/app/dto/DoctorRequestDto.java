@@ -10,6 +10,7 @@ import javax.validation.constraints.PastOrPresent;
 
 import com.app.entities.Gender;
 import com.app.entities.Role;
+import com.app.entities.Status;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -59,4 +60,6 @@ public class DoctorRequestDto {
 	
 	@NotNull(message = "charges should not be null")
 	private double charges;
+	
+	private Status status;
 }

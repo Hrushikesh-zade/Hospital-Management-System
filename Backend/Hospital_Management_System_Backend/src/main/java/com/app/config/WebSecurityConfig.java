@@ -32,6 +32,11 @@ public class WebSecurityConfig {
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+//	@Bean
+//	public PasswordDecoder decoder() {
+//		
+//	}
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

@@ -7,6 +7,8 @@ import java.util.List;
 import com.app.entities.Employee;
 import com.app.entities.Gender;
 import com.app.entities.Role;
+import com.app.entities.Status;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -34,6 +36,7 @@ public class EmployeeResponseDto {
 	private double contactNo;
 	private LocalDate hiringDate;
 	private double salary;
+	private Status status;
 	
 	
 	public static List<EmployeeResponseDto> createEmployee(List<Employee> emps){
@@ -53,8 +56,11 @@ public class EmployeeResponseDto {
 			er.setContactNo(e.getUser().getContactNo());
 			er.setHiringDate(e.getHiringDate());
 			er.setSalary(e.getSalary());
+			er.setStatus(e.getUser().getStatus());
 			
-			list.add(er);
+			if(er.getStatus().name().equals("ACTIVE")) {	
+				list.add(er);
+			}
 			
 		}
 		return list;
@@ -73,6 +79,14 @@ public class EmployeeResponseDto {
 		dto.setContactNo(e.getUser().getContactNo());
 		dto.setHiringDate(e.getHiringDate());
 		dto.setSalary(e.getSalary());
+		dto.setStatus(e.getUser().getStatus());
+		
+//		if(dto.getStatus().name().equals("ACTIVE")) {
+//			return dto;
+//		}
+//		else {
+//			throw new ResourceNotFoundException("User is not active");
+//		}
 		
 		return dto;
 		

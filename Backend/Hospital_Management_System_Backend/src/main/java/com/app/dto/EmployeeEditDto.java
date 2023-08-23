@@ -12,6 +12,7 @@ import com.app.entities.BloodGroup;
 import com.app.entities.Gender;
 import com.app.entities.PaymentStatus;
 import com.app.entities.Role;
+import com.app.entities.Status;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -44,4 +45,6 @@ public class EmployeeEditDto {
 	private LocalDate hiringDate;
 	
 	private double salary;
+	
+	private Status status;
 }

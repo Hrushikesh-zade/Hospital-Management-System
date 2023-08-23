@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.Repository.UserRepository;
 import com.app.dto.UserDto;
+import com.app.entities.Status;
 import com.app.entities.User;
 import com.app.exception_handler.ResourceNotFoundException;
 
@@ -59,5 +60,20 @@ public class UserServiceImpl implements UserService {
 		
 		return "password changed successfully";
 	}
+
+	@Override
+	public String updateStatus(Integer id, String status) {
+		// TODO Auto-generated method stub
+		
+		Status status1 = Status.valueOf(status);
+		
+		User u = repo.findById(id).orElseThrow(()-> new ResourceNotFoundException("User Not Found"));
+		
+		u.setStatus(status1);
+		
+		return "Status updated Successfully";
+	}
+	
+	
 
 }

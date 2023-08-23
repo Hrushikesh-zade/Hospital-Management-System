@@ -12,4 +12,6 @@ public interface UserService {
 	UserDto getUserByEmailAndPassword(String email,String password);
 	
 	String updatePassword(Integer id,String password);
+	
+	String updateStatus(Integer id,String status);
 }

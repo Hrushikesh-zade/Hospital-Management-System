@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.app.entities.Gender;
 import com.app.entities.Role;
+import com.app.entities.Status;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -27,4 +28,5 @@ public class UserDto {
 	private LocalDate dob;
 	private Gender gender;
 	private double contactNo;
+	private Status status;
 }

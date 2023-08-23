@@ -6,11 +6,11 @@ import java.util.List;
 
 import com.app.entities.Doctor;
 import com.app.entities.Gender;
-import com.app.entities.Patient;
-//import java.util.List;
-//
-//import com.app.entities.Patient;
+
+
 import com.app.entities.Role;
+import com.app.entities.Status;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -39,6 +39,7 @@ public class DoctorResponseDto {
 	private LocalDate hiringDate;
 	private double salary;
 	private double charges;
+	private Status status;
 //	private List<Patient> patients;
 
 	
@@ -58,9 +59,15 @@ public class DoctorResponseDto {
 			dr.setHiringDate(d.getEmployee().getHiringDate());
 			dr.setSalary(d.getEmployee().getSalary());
 			dr.setCharges(d.getCharges());
+			dr.setStatus(d.getEmployee().getUser().getStatus());
 //			dr.setPatients(d.getPatients());
 			
+//			if(dr.getStatus().name().equals("ACTIVE")) {
+//				list.add(dr);
+//			}
+			
 			list.add(dr);
+			
 		}
 		return list;
 	}
@@ -79,7 +86,15 @@ public class DoctorResponseDto {
 		dr.setHiringDate(d.getEmployee().getHiringDate());
 		dr.setSalary(d.getEmployee().getSalary());
 		dr.setCharges(d.getCharges());
+		dr.setStatus(d.getEmployee().getUser().getStatus());
 //		dr.setPatients(d.getPatients());
+		
+//		if(dr.getStatus().name().equals("ACTIVE")) {
+//			return dr;
+//		}
+//		else {
+//			throw new ResourceNotFoundException("User is not active");
+//		}
 		
 		return dr;
 		

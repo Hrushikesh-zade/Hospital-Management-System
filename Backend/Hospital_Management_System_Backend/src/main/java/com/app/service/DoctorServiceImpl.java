@@ -14,6 +14,7 @@ import com.app.dto.EmployeeRequestDto;
 import com.app.dto.PatientResponseDto;
 import com.app.entities.Doctor;
 import com.app.entities.Employee;
+import com.app.entities.Status;
 import com.app.exception_handler.ResourceNotFoundException;
 import static com.app.dto.DoctorResponseDto.*;
 import static com.app.dto.PatientResponseDto.createPatient;
@@ -60,11 +61,27 @@ public class DoctorServiceImpl implements DoctorService {
 		return "Doctor Added with Doctor ID:"+d.getDoctorId();
 	}
 
+//	@Override
+//	public String removeDoctor(Integer doctorId) {
+//		// TODO Auto-generated method stub
+//		
+//		repo.deleteById(doctorId);
+//		
+//		return "Doctor deleted";
+//	}
+	
 	@Override
 	public String removeDoctor(Integer doctorId) {
 		// TODO Auto-generated method stub
 		
-		repo.deleteById(doctorId);
+		Status status = Status.valueOf("INACTIVE");
+		
+		
+		Doctor d = repo.findById(doctorId).orElseThrow(()-> new ResourceNotFoundException("doctor not found"));
+		
+		
+		d.getEmployee().getUser().setStatus(status);
+		
 		
 		return "Doctor deleted";
 	}
@@ -102,6 +119,7 @@ public class DoctorServiceImpl implements DoctorService {
 		d.getEmployee().setHiringDate(dr.getHiringDate());
 		d.getEmployee().setSalary(dr.getSalary());
 		d.setCharges(dr.getCharges());
+		d.getEmployee().getUser().setStatus(dr.getStatus());
 		
 		return "employee is updated";
 	}

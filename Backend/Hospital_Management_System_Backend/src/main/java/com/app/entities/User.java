@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -52,9 +54,13 @@ public class User {
 	
 	@Column(name = "contact")
 	private double contactNo;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 
 	public User(String firstName, String lastName, String email, String password, String confirmPassword, Role role,
-			double contactNo) {
+			double contactNo, Status status) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -63,6 +69,7 @@ public class User {
 		this.confirmPassword = confirmPassword;
 		this.role = role;
 		this.contactNo = contactNo;
+		this.status = status;
 	}
 	
 	

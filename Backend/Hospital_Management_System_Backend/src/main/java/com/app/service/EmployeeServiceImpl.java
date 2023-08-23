@@ -13,6 +13,7 @@ import com.app.dto.EmployeeRequestDto;
 import com.app.dto.EmployeeResponseDto;
 import com.app.dto.UserDto;
 import com.app.entities.Employee;
+import com.app.entities.Status;
 import com.app.entities.User;
 import com.app.exception_handler.ResourceNotFoundException;
 import static com.app.dto.EmployeeResponseDto.createEmployee;
@@ -49,13 +50,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 	}
 
+//	@Override
+//	public String removeEmployee(Integer empId) {
+//		// TODO Auto-generated method stub
+//		
+//		Employee e = repo.findById(empId).orElseThrow(()-> new ResourceNotFoundException("EmployeeNotFound"));
+//		
+//		repo.delete(e);
+//		
+//		return "employee with Id:"+e.getEmpId()+" is deleted";
+//	}
+	
+	
 	@Override
 	public String removeEmployee(Integer empId) {
 		// TODO Auto-generated method stub
 		
+		Status status = Status.valueOf("INACTIVE");
+		
 		Employee e = repo.findById(empId).orElseThrow(()-> new ResourceNotFoundException("EmployeeNotFound"));
 		
-		repo.delete(e);
+		e.getUser().setStatus(status);
 		
 		return "employee with Id:"+e.getEmpId()+" is deleted";
 	}
@@ -96,6 +111,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		e.getUser().setDob(emp.getDob());
 		e.getUser().setGender(emp.getGender());
 //		e.getUser().setRole(emp.getRole());
+		e.getUser().setStatus(emp.getStatus());
 		
 		return "employee with empId: "+ e.getEmpId()+" updated successfully" ;
 		

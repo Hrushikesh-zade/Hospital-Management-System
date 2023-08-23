@@ -10,6 +10,7 @@ import com.app.entities.BloodGroup;
 import com.app.entities.Gender;
 import com.app.entities.PaymentStatus;
 import com.app.entities.Role;
+import com.app.entities.Status;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -56,4 +57,6 @@ public class PatientRequestDto {
 	private String prescription;
 	private Integer doctorId;
 	private Integer wardId;
+	
+	private Status status;
 }

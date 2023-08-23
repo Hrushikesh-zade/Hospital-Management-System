@@ -6,12 +6,14 @@ import java.util.List;
 
 
 import com.app.entities.BloodGroup;
-import com.app.entities.Doctor;
+
 import com.app.entities.Gender;
 //import com.app.entities.Doctor;
 import com.app.entities.Patient;
 import com.app.entities.PaymentStatus;
 import com.app.entities.Role;
+import com.app.entities.Status;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -44,6 +46,8 @@ public class PatientResponseDto {
 //	private List<Doctor> doctors;
 	private Integer wardId;
 	
+	private Status status;
+	
 	
 	public static List<PatientResponseDto> createPatient(List<Patient> pt){
 		List<PatientResponseDto> list = new ArrayList<>();
@@ -66,9 +70,13 @@ public class PatientResponseDto {
 			pr.setPrescription(p.getPrescription());
 //			pr.setDoctors(p.getDoctors());
 			pr.setWardId(p.getWard().getWardId());
+			pr.setStatus(p.getUser().getStatus());
 			
+			if(pr.getStatus().name().equals("ACTIVE")) {
+				list.add(pr);
+			}
 			
-			list.add(pr);
+
 		}
 		
 		return list;
@@ -93,7 +101,16 @@ public class PatientResponseDto {
 		pr.setPrescription(p.getPrescription());
 //		pr.setDoctors(p.getDoctors());
 		pr.setWardId(p.getWard().getWardId());
+		pr.setStatus(p.getUser().getStatus());
+		
+//		if(pr.getStatus().name().equals("ACTIVE")) {
+//			return pr;
+//		}
+//		else {
+//			throw new ResourceNotFoundException("User is not active");
+//		}
 		
 		return pr;
+		
 	}
 }
