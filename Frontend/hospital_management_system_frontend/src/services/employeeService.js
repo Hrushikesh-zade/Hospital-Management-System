@@ -26,4 +26,12 @@ const remove=(id)=>{
     return axios.delete(url+`/${id}`,headers_values);
 }
 
-export default {getAll,remove,get,create,update};
+const reassign=(id) => {
+  return axios.put(url+`/reassign/${id}`,{},headers_values);
+}
+
+const getAllInactive = () => {
+  return axios.get(url+`/inactive`,headers_values);
+}
+
+export default {getAll,remove,get,create,update,reassign,getAllInactive};

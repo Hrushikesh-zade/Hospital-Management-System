@@ -16,6 +16,8 @@ import Invoice from "./components/Accountant/Invoice";
 import AddPrescription from "./components/Doctor/AddPrescription";
 import DoctorPage from "./components/Doctor/DoctorPage";
 import Login from "./components/Signin/Login";
+import InactiveEmployees from "./components/Admin/InactiveEmployees";
+import InactivePatients from "./components/Receptionist/InactivePatient";
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
           <Route path="/patientDetails/:id" element={<PatientDetails />} />
           <Route path="/patient/edit/:id" element={<EditPatient />} />
           <Route path="/patientView/:id" element={<PatientLoginDetails />} />
+          <Route path="/inactivePatients" element={<InactivePatients />} />
 
           {/* admin page routes */}
           <Route path="/admin" element={<AdminPage />} />
@@ -34,6 +37,7 @@ function App() {
           <Route path="/admin/addDoctor" element={<AddDoctor />} />
           <Route path="/admin/edit/:id" element={<EditEmployee />} />
           <Route path="/admin/info/:id" element={<EmployeeInfo />} />
+          <Route path="/admin/inactiveEmployees" element={<InactiveEmployees />} />
 
           {/* accountant page routes */}
           <Route exact path="/accountant" element={<PatientList />} />

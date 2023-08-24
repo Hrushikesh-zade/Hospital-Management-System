@@ -1,25 +1,22 @@
 import { useEffect, useState } from "react";
 import employeeService from "../../services/employeeService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button, Collapse, Modal } from "react-bootstrap";
 
-const AdminPage = () => {
+const InactiveEmployees = () => {
   const [employeeList, setEmployeeList] = useState([]);
-  const [employee, setEmployee] = useState({});
-  const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
   const [searchByFirstName, setSearchByFirstName] = useState("");
   const [searchByEmail, setSearchByEmail] = useState("");
   const [searchById, setSearchById] = useState("");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     getEmployees();
   }, []);
 
-  const handleShow = (p) => {
-    setEmployee(p);
-    setShow(true);
-  };
+
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
@@ -32,14 +29,7 @@ const AdminPage = () => {
     };
   }, [showAlert]);
 
-  const handleClick = () => {
-    setShowAlert(true);
-  };
 
-  const handleClose = () => {
-    // console.log("in handle close" + id);
-    setShow(false);
-  };
 
   const clearAllFilters = () => {
     setOpen(false);
@@ -48,16 +38,14 @@ const AdminPage = () => {
     setSearchById("");
   };
 
-  const handleDelete = () => {
+  const activate = (empId) => {
     // console.log("Printing id", id);
     employeeService
-      .remove(employee.empId)
+      .reassign(empId)
       .then((response) => {
-        console.log("employee deleted successfully", response.data);
-        handleClick(); //alert
-        // setPatient({});
-        setShow(false);
-        getEmployees();
+        navigate("/admin");
+
+        
       })
       .catch((error) => {
         console.log("Something went wrong", error);
@@ -66,7 +54,7 @@ const AdminPage = () => {
 
   function getEmployees() {
     employeeService
-      .getAll()
+      .getAllInactive()
       .then((resp) => {
         setEmployeeList(resp.data);
         console.log(resp.data);
@@ -78,55 +66,7 @@ const AdminPage = () => {
 
   return (
     <div>
-      <>
-        {showAlert && (
-          <Alert
-            variant="danger"
-            onClose={() => setShowAlert(false)}
-            dismissible
-            className="fade"
-          >
-            Patient <span>{employee.firstName}</span>{" "}
-            <span>{employee.lastName}</span> deleted succefully
-          </Alert>
-        )}
-      </>
-
-      {/*  */}
-
-      <>
-        <Modal show={show} onHide={handleClose} animation={false}>
-          <Modal.Header
-            closeButton
-            style={{ backgroundColor: "red", color: "white" }}
-          >
-            <Modal.Title
-              id="example-custom-modal-styling-title"
-              style={{ backgroundColor: "red" }}
-            >
-              Are you Sure?
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body style={{ backgroundColor: "white" }}>
-            Employee : <span>{employee.firstName}</span>
-            <span style={{ margin: "2px" }}>{employee.lastName} </span>
-            will be deleted permanently
-          </Modal.Body>
-          <Modal.Footer style={{ backgroundColor: "white" }}>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="danger" onClick={handleDelete}>
-              Delete
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
-
-      {/*  */}
-
       
-
       {/* start of  filter bar */}
 
       {/* 2 container */}
@@ -155,15 +95,10 @@ const AdminPage = () => {
                 <i className="bi bi-funnel"></i>
                 Filter it
               </button>
-              <Link to="/admin/add" className="btn btn-primary">
-                Add Employee
+              <Link to="/admin" className="btn btn-primary">
+                Go Back
               </Link>
-              <Link to="/admin/addDoctor" className="btn btn-primary">
-                Add Doctor
-              </Link>
-              <Link to="/admin/inactiveEmployees" className="btn btn-primary">
-                Inactive Employees
-              </Link>
+              
             </div>
           </div>
 
@@ -255,7 +190,7 @@ const AdminPage = () => {
               <th scope="col">ROLE</th>
               <th scope="col">DETAILS</th>
               <th scope="col">EDIT</th>
-              <th scope="col">REMOVE</th>
+              <th scope="col">ACTIVATE</th>
             </tr>
           </thead>
           <tbody>
@@ -317,13 +252,13 @@ const AdminPage = () => {
 
                   <td>
                     <button
-                      className="btn btn-danger ml-2"
-                      onClick={() => {
-                        handleShow(patient);
+                      className="btn btn-success ml-2"
+                      onClick={()=>{
+                        activate(patient.empId);
                       }}
                     >
-                      <i className="bi-trash"></i>
-                      Delete
+                      <i className="bi bi-arrow-counterclockwise"></i>
+                      Activate
                     </button>
                   </td>
                 </tr>
@@ -335,4 +270,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default InactiveEmployees;

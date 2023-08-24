@@ -31,4 +31,13 @@ const remove = (id) => {
 };
 
 
-export default { getAll, create, get, update, remove,getAllocatedDoctors };
+const reassign=(id) => {
+  return axios.put(url+`/reassigned/${id}`,{},headers_values);
+}
+
+const getAllInactive = () => {
+  return axios.get(url+`/inactive`,headers_values);
+}
+
+
+export default { getAll, create, get, update, remove,getAllocatedDoctors,reassign,getAllInactive};
