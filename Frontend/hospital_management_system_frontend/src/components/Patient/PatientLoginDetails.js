@@ -4,27 +4,7 @@ import { useParams } from "react-router-dom";
 import patientUserService from "../../services/patientUserService";
 import "../../css/profile.css";
 function PatientLoginDetails() {
-  // {
-  //     id: 1,
-  //     firstName: "Hrushi",
-  //     email: "hrushi@gmail.com",
-  //     lastName: "Zade",
-  //     payStatus: "Not_Applicable",
-  //     Date_Of_Admission: "23-12-2021",
-  //     BloodGr: "o+",
-  //     DOB: "23-06-1989",
-  //     symptoms: [
-  //       "vomiting","stomach Pain"
-  //     ],
-  //     prescription: [
-  //       "paracetamol","dolo","disprin"
-  //     ],
-  //     Doct_Alloted: "vijay dhakan",
-  //     ward_id: "a",
-  //     Bed_Alloted: 23,
-  //     paymentStatus: "paid",
-  //     phone_no: 8806800582
-  //   }
+  
 
   const [patientUser, setPatientUser] = useState([]);
 
@@ -36,7 +16,7 @@ function PatientLoginDetails() {
       .then((resp) => {
         console.log("loaded successfully");
         console.log(id);
-        console.log(resp.data.prescription);
+        console.log(resp.data);
         setPatientUser(resp.data);
       })
       .catch((err) => {
@@ -158,9 +138,10 @@ function PatientLoginDetails() {
             <div className="card-body">
               <h4>Prescription :</h4>
               <div className="box">
-              {patientUser.prescription?.map((item)=>(
+              {/* {patientUser.prescription?.map((item)=>(
                 <p>{item}</p>
-              ))}
+              ))} */}
+              {patientUser.prescription}
                 
               </div>
             </div>

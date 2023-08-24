@@ -17,7 +17,8 @@ const EditEmployee = () => {
     gender: "",
     contactNo: "",
     hiringDate: "",
-    salary: ""
+    salary: "",
+    status: "ACTIVE"
     });
     
 

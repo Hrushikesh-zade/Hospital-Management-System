@@ -25,6 +25,7 @@ const AddPrescription = () => {
     contactNo: "",
     prescription: "",
     gender: "",
+    status: "ACTIVE"
   });
 
   useEffect(() => {

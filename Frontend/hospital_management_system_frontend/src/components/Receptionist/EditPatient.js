@@ -18,7 +18,8 @@ const EditPatient = () => {
     wardId: "",
     contactNo: "",
     prescription:"",
-    gender: ""
+    gender: "",
+    status: "ACTIVE"
 
   });
 

@@ -24,6 +24,7 @@ const AddPatient = () => {
     prescription: "",
     password: "12345",
     confirmPassword: "12345",
+    status: "ACTIVE"
   });
 
   const [doctorList, setDoctorList] = useState([]);

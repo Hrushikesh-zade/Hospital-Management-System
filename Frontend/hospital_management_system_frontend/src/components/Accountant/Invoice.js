@@ -24,7 +24,8 @@ const Invoice = () => {
     wardId: "",
     contactNo: "",
     prescription:"",
-    gender: ""
+    gender: "",
+    status: "ACTIVE"
 
   });
   

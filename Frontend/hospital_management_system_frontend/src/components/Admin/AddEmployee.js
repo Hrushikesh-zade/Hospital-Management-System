@@ -20,7 +20,8 @@ const [employeeDetails,setEmployeeDetails] = useState({
     gender: "",
     contactNo: "",
     hiringDate: "",
-    salary: ""
+    salary: "",
+    status: "ACTIVE"
     });
 
     const handleChange = (key, value) => {

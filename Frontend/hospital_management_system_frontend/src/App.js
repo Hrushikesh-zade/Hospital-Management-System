@@ -15,6 +15,7 @@ import PatientList from "./components/Accountant/PatientList";
 import Invoice from "./components/Accountant/Invoice";
 import AddPrescription from "./components/Doctor/AddPrescription";
 import DoctorPage from "./components/Doctor/DoctorPage";
+import Login from "./components/Signin/Login";
 
 function App() {
   return (
@@ -22,9 +23,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route exact path="/" element={<PatientHomePage />} />
-          {/* <Route exact path='/' element={<TablesDesign />} /> */}
           <Route path="/addPatient" element={<AddPatient />} />
-          {/* <Route path='/addPatient/:id' element={<EditPatient />} /> */}
           <Route path="/patientDetails/:id" element={<PatientDetails />} />
           <Route path="/patient/edit/:id" element={<EditPatient />} />
           <Route path="/patientView/:id" element={<PatientLoginDetails />} />
@@ -36,7 +35,7 @@ function App() {
           <Route path="/admin/edit/:id" element={<EditEmployee />} />
           <Route path="/admin/info/:id" element={<EmployeeInfo />} />
 
-          {/* admin page routes */}
+          {/* accountant page routes */}
           <Route exact path="/accountant" element={<PatientList />} />
           <Route path="/accountant/invoice/:id" element={<Invoice />} />
 
@@ -46,6 +45,9 @@ function App() {
             path="/doctors/:doc_id/patient/:pat_id"
             element={<AddPrescription />}
           />
+
+          {/* login page route */}
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </BrowserRouter>

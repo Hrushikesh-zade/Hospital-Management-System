@@ -28,18 +28,6 @@ const EmployeeInfo = () => {
 
 
 
-//       "empId": 1,
-//   "firstName": "employee1",
-//   "lastName": "z1",
-//   "email": "employee1@gmail.com",
-//   "role": "ADMIN",
-//   "dob": "2023-07-18",
-//   "gender": "MALE",
-//   "contactNo": 123456790,
-//   "hiringDate": "2023-07-18",
-//   "salary": 50000
-
-
     return (
         <div>
       <table>

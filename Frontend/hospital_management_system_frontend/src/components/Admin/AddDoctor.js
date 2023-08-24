@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import doctorService from "../../services/employeeService";
+import doctorService from "../../services/doctorService";
 
 
 const AddDoctor = () => {
@@ -35,8 +35,10 @@ const [employeeDetails,setEmployeeDetails] = useState({
     contactNo: "",
     hiringDate: "",
     salary: "",
-    charges: ""
+    charges: "",
+    status: "ACTIVE"
     });
+
 
     const handleChange = (key, value) => {
         // console.log(value)
