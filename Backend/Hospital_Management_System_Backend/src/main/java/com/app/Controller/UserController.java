@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -101,7 +101,19 @@ public class UserController {
 	}
 	
 	@PutMapping("/changepassword")
-	public ResponseEntity<?> updateUserPassword(@PathVariable Integer userId, @RequestBody LoginRequestDto dto){
+	public ResponseEntity<?> updateUserPassword(@RequestBody LoginRequestDto dto){
 		return new ResponseEntity<>(new ApiResponse(service.updatePassword(dto)), HttpStatus.OK);
 	}
+	
+	@PutMapping("/getUserByEmail")
+	public ResponseEntity<?> updateUserByEmail(@RequestBody LoginRequestDto dto){
+		return new ResponseEntity<>(service.getUserByEmail(dto.getEmail()), HttpStatus.OK);
+	}
+	
+	@GetMapping("/getUser/{userId}")
+	public ResponseEntity<?> findUserById(@PathVariable Integer userId){
+		return new ResponseEntity<>(service.findUserById(userId), HttpStatus.OK);
+	}
+	
+	
 }

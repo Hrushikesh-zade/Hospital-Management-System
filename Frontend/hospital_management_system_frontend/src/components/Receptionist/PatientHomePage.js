@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Button, Collapse, Modal } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import patientService from "../../services/patient.service";
 import ProfileHeader from "./ProfileHeader";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -16,8 +16,6 @@ function PatientHomePage() {
   const [searchByFirstName, setSearchByFirstName] = useState("");
   const [searchByEmail, setSearchByEmail] = useState("");
   const [searchById, setSearchById] = useState("");
-
-  const navigate = useNavigate();
 
   /**
    * start of alert

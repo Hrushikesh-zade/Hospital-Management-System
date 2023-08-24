@@ -2,21 +2,25 @@ import { useEffect, useState } from "react";
 import doctorService from "../../services/doctorService";
 import { Link, useParams } from "react-router-dom";
 import { Collapse } from "react-bootstrap";
+import Navbar from "../General/Navbar";
 
 const DoctorPage = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [patients, setPatients] = useState([]);
-  const [patient, setPatient] = useState({});
-  const [show, setShow] = useState(false);
+  // const [patient, setPatient] = useState({});
+  // const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
   const [searchByFirstName, setSearchByFirstName] = useState("");
   const [searchByEmail, setSearchByEmail] = useState("");
   const [searchById, setSearchById] = useState("");
+  const [doctor,setDoctor] = useState({});
 
   const { id } = useParams();
 
   useEffect(() => {
     getAllPatients(id);
+    getDoctorsInfo(id);
+    
   }, []);
 
   function getAllPatients(doctor_id) {
@@ -30,10 +34,23 @@ const DoctorPage = () => {
       });
   }
 
-  const handleShow = (p) => {
-    setPatient(p);
-    setShow(true);
-  };
+  function getDoctorsInfo(docs_id) {
+    doctorService
+      .getDoctorInfo(docs_id)
+      .then((resp) => {
+        console.log("**********");
+        console.log(resp.data);
+        setDoctor(resp.data);
+      })
+      .catch((err) => {
+        console.log("error " + err);
+      });
+  }
+
+  // const handleShow = (p) => {
+  //   setPatient(p);
+  //   setShow(true);
+  // };
 
   const clearAllFilters = () => {
     setOpen(false);
@@ -52,24 +69,12 @@ const DoctorPage = () => {
     };
   }, [showAlert]);
 
-  const handleDelete = () => {
-    // console.log("Printing id", id);
-    // patientService
-    //   .remove(patient.patientId)
-    //   .then((response) => {
-    //     console.log("employee deleted successfully", response.data);
-    //     handleClick(); //alert
-    //     // setPatient({});
-    //     setShow(false);
-    //     init();
-    //   })
-    //   .catch((error) => {
-    //     console.log("Something went wrong", error);
-    //   });
-  };
 
   return (
     <div>
+      <Navbar firstName={doctor.firstName} lastName={doctor.lastName} sid={doctor.doctorId} role={doctor.role} ></Navbar>
+
+
       <div className="container-fluid ">
         <div className="p-3 mb-2 bg-light text-white">
           <div

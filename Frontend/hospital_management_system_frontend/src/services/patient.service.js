@@ -30,7 +30,6 @@ const remove = (id) => {
   return axios.delete(url+`/${id}`,headers_values);
 };
 
-
 const reassign=(id) => {
   return axios.put(url+`/reassigned/${id}`,{},headers_values);
 }
@@ -40,4 +39,4 @@ const getAllInactive = () => {
 }
 
 
-export default { getAll, create, get, update, remove,getAllocatedDoctors,reassign,getAllInactive};
+export default { getAll, create, get, update,reassign,getAllInactive, remove,getAllocatedDoctors };

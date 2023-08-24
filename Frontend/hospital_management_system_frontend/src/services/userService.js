@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const url = "http://localhost:8080/auth/signin";
-const login_url = "http://localhost:8080/users/login";
+const login_url = "http://localhost:8080/users";
+const change_Password = "http://localhost:8080"
 
 const config = {
     headers:{
@@ -23,7 +24,20 @@ const getToken=()=>{
 
 const getUser=(data)=>{
     console.log(getToken());
-    return axios.post(login_url,data,config);
+    return axios.post(`${login_url}/login`,data,config);
 }
 
-export default {getTokenRequest,getToken,getUser};
+const getUserByEmail=(data)=>{
+    console.log(getToken());
+    return axios.put(`${login_url}/getUserByEmail`,data,config);
+}
+
+const changePassword=(data)=>{
+  return axios.put(`${login_url}/changepassword`,data,config);
+}
+
+const getUserEmailById=(id)=>{
+  return axios.get(`${login_url}/getUser/${id}`,config);
+}
+
+export default {getTokenRequest,getToken,getUser,changePassword,getUserByEmail,getUserEmailById};

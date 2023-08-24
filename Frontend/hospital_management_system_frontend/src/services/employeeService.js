@@ -25,7 +25,6 @@ const update = (id,data) => {
 const remove=(id)=>{
     return axios.delete(url+`/${id}`,headers_values);
 }
-
 const reassign=(id) => {
   return axios.put(url+`/reassign/${id}`,{},headers_values);
 }

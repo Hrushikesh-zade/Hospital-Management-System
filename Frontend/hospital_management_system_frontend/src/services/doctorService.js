@@ -20,6 +20,10 @@ const create = (data) => {
 const getAllPatients =(id) =>{
   return axios.get(url+`/patients/${id}`,headers_values);
  }
+
+ const getDoctorInfo =(id) =>{
+  return axios.get(url+`/${id}`,headers_values);
+ }
  
  const addDoctor =(patient_id,doctor_id)=>{
   console.log("akjsf");
@@ -27,4 +31,4 @@ const getAllPatients =(id) =>{
  }
 
  
-export default { getAll, create,getAllPatients,addDoctor };
+export default { getAll, create,getAllPatients,addDoctor,getDoctorInfo};

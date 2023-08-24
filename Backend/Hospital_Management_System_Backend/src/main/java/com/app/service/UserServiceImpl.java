@@ -9,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.Repository.UserRepository;
 import com.app.dto.LoginRequestDto;
 import com.app.dto.UserDto;
+import com.app.dto.UserResponseDto;
 import com.app.entities.Status;
 import com.app.entities.User;
 import com.app.exception_handler.ResourceNotFoundException;
+import static com.app.dto.UserResponseDto.createSingleUser;
 
 @Service
 @Transactional
@@ -59,7 +61,7 @@ public class UserServiceImpl implements UserService {
 		
 		User u = repo.findByEmail(dto.getEmail()).orElseThrow(()-> new ResourceNotFoundException("user not found"));
 		
-		u.setPassword(dto.getPassword());
+		u.setPassword(enc.encode(dto.getPassword()));
 		
 		return "password changed successfully";
 	}
@@ -75,6 +77,22 @@ public class UserServiceImpl implements UserService {
 		u.setStatus(status1);
 		
 		return "Status updated Successfully";
+	}
+
+	@Override
+	public UserResponseDto getUserByEmail(String email) {
+		
+		User u = repo.findByEmail(email).orElseThrow(()-> new ResourceNotFoundException("user not found"));
+		
+		return createSingleUser(u, 0);
+	}
+
+	@Override
+	public UserResponseDto findUserById(Integer id) {
+		
+		User u = repo.findById(id).orElseThrow(()-> new ResourceNotFoundException("User Not Found"));
+		
+		return createSingleUser(u, 0);
 	}
 	
 	

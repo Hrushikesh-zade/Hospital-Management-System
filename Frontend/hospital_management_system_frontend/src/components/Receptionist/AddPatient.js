@@ -75,41 +75,7 @@ const AddPatient = () => {
 
   return (
     <div>
-      {/* <header style={{ border: "2px solid black" }}>
-        ans:
-        {addpatient.firstName}
-        <br />
-        {addpatient.lastName}
-        <br />
-        {addpatient.email}
-        <br />
-        {addpatient.bloodGroup}
-        <br />
-        {addpatient.contactNo}
-        <br />
-        {addpatient.paymentStatus}
-        <br />
-        {addpatient.dob}
-        <br />
-        {addpatient.disease}
-        <br />
-        {addpatient.wardId}
-        <br />
-        {addpatient.doctorId}
-        <br />
-        {addpatient.dateOfAdmission}
-        <br />
-        {addpatient.password}
-        <br />
-        {addpatient.confirmPassword}
-        <br />
-        {addpatient.gender}
-        <br />
-        {addpatient.role}
-        <br />
-        {addpatient.prescription}
-        <br />
-      </header> */}
+      
 
       <div>
         <label>Enter firstname</label>

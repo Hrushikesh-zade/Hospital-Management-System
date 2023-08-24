@@ -16,14 +16,23 @@ import Invoice from "./components/Accountant/Invoice";
 import AddPrescription from "./components/Doctor/AddPrescription";
 import DoctorPage from "./components/Doctor/DoctorPage";
 import Login from "./components/Signin/Login";
-import InactiveEmployees from "./components/Admin/InactiveEmployees";
+import TImePass from "./components/TimePass/TImePassPage";
+import DoctorProfile from "./components/Doctor/DoctorProfile";
+import ChangePassword from "./components/General/ChangePassword";
 import InactivePatients from "./components/Receptionist/InactivePatient";
+import InactiveEmployees from "./components/Admin/InactiveEmployees";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
+
+
+        {/* receptionist page routes */}
+          {/* <Route exact path="/" element={<TImePass />} /> */}
+
+          {/* receptionist page routes */}
           <Route exact path="/" element={<PatientHomePage />} />
           <Route path="/addPatient" element={<AddPatient />} />
           <Route path="/patientDetails/:id" element={<PatientDetails />} />
@@ -45,6 +54,7 @@ function App() {
 
           {/* doctor page routes */}
           <Route path="/doctors/:id" element={<DoctorPage />} />
+          <Route path="/doctors/profile/:id" element={<DoctorProfile/>} />
           <Route
             path="/doctors/:doc_id/patient/:pat_id"
             element={<AddPrescription />}
@@ -52,6 +62,7 @@ function App() {
 
           {/* login page route */}
           <Route path="/login" element={<Login />} />
+          <Route path="/changePassword/:id" element={<ChangePassword />} />
         </Routes>
       </div>
     </BrowserRouter>
