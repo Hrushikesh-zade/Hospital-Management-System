@@ -68,7 +68,7 @@ public class PatientController {
 		return new ResponseEntity<>(service.getAllDeletedPatients(), HttpStatus.OK);
 	}
 	
-	@PutMapping("reassigned/{patientId}")
+	@PutMapping("/reassigned/{patientId}")
 	public ResponseEntity<?> reassignPatient(@PathVariable Integer patientId){
 		return new ResponseEntity<>(new ApiResponse(service.reAssignPatient(patientId)), HttpStatus.OK);
 	}

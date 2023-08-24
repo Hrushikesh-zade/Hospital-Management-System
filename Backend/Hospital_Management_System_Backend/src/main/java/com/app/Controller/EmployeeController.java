@@ -65,7 +65,7 @@ public class EmployeeController {
 		return new ResponseEntity<>(service.displayDeletedEmployees(), HttpStatus.OK);
 	}
 	
-	@PutMapping("reassign/{empId}")
+	@PutMapping("/reassign/{empId}")
 	public ResponseEntity<?> updateEmployee(@PathVariable Integer empId){
 		return new ResponseEntity<>(new ApiResponse(service.reAssignEmployee(empId)), HttpStatus.OK);
 	}
