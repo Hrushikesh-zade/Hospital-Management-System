@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.Repository.UserRepository;
+import com.app.dto.LoginRequestDto;
 import com.app.dto.UserDto;
 import com.app.entities.Status;
 import com.app.entities.User;
@@ -51,12 +52,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String updatePassword(Integer id,String password) {
+	public String updatePassword(LoginRequestDto dto) {
 		// TODO Auto-generated method stub
 		
-		User u = repo.findById(id).orElseThrow(()-> new ResourceNotFoundException("User Not Found"));
+//		User u = repo.findById(id).orElseThrow(()-> new ResourceNotFoundException("User Not Found"));
 		
-		u.setPassword(password);
+		User u = repo.findByEmail(dto.getEmail()).orElseThrow(()-> new ResourceNotFoundException("user not found"));
+		
+		u.setPassword(dto.getPassword());
 		
 		return "password changed successfully";
 	}

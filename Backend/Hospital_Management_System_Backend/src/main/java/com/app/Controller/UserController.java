@@ -100,8 +100,8 @@ public class UserController {
 		
 	}
 	
-	@PutMapping("/changePassword/{userId}")
-	public ResponseEntity<?> updateUserPassword(@PathVariable Integer userId, @RequestBody String password){
-		return new ResponseEntity<>(new ApiResponse(service.updatePassword(userId, password)), HttpStatus.OK);
+	@PutMapping("/changepassword")
+	public ResponseEntity<?> updateUserPassword(@PathVariable Integer userId, @RequestBody LoginRequestDto dto){
+		return new ResponseEntity<>(new ApiResponse(service.updatePassword(dto)), HttpStatus.OK);
 	}
 }
