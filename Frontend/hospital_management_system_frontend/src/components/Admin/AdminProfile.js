@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import doctorService from "../../services/doctorService";
+import {  useParams } from "react-router-dom";
+import userService from "../../services/userService";
 // import userService from "../../services/userService";
 
-const DoctorProfile = () => {
+const AdminProfile = () => {
   const [profile, setProfile] = useState({});
+  // const [pass, setPass] = useState(
+  //   {
+  //       email: "",
+  //       password: ""
+  //   }
+  // )
+    
+
 
   const { id } = useParams();
 
+
   useEffect(() => {
     console.log("ans2");
-    doctorService
-      .getDoctorInfo(id)
+    userService
+      .getUserEmailById(id)
       .then((resp) => {
+          console.log("resp.data");
         setProfile(resp.data);
+        console.log(resp.data);
+      //  setPass({...pass,email:resp.data.email});
       })
       .catch((err) => {
         console.log(err);
@@ -24,19 +36,14 @@ const DoctorProfile = () => {
   return (
     <div>
       {/* <button onClick={changePassword}> Change Password</button> */}
-      <br />
-      <br />
-      {profile.charges}
-      <br />
+      
       <br />
       {profile.contactNo}
       <br />
       <br />
       dob: {profile.dob}
       <br />
-      <br />
-      {profile.doctorId}
-      <br />
+      
       <br />
       {profile.email}
       <br />
@@ -47,7 +54,7 @@ const DoctorProfile = () => {
       {profile.gender}
       <br />
       <br />
-      hiring date : {profile.hiringDate}
+      {/* hiring date : {profile.hiringDate} */}
       <br />
       <br />
       {profile.lastName}
@@ -56,7 +63,7 @@ const DoctorProfile = () => {
       {profile.role}
       <br />
       <br />
-      {profile.salary}
+      {profile.userId}
       <br />
       <br />
       {profile.status}
@@ -65,4 +72,4 @@ const DoctorProfile = () => {
   );
 };
 
-export default DoctorProfile;
+export default AdminProfile;

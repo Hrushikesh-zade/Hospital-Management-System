@@ -1,55 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Button, Collapse, Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import {  Collapse } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
 import patientService from "../../services/patient.service";
-import ProfileHeader from "../Receptionist/ProfileHeader";
 import "bootstrap-icons/font/bootstrap-icons.css";
 // import logo from "../images/logo.png"
 import  '../../css/PatientcssHomePage.css';
+import userService from "../../services/userService";
+import HeaderNavbar from "../General/HeaderNavbar";
 
 function PatientList() {
   const [patients, setPatients] = useState([]);
-  const [patient, setPatient] = useState({});
-  // const [id, setId] = useState(0);
+
   const [open, setOpen] = useState(false);
-  const [show, setShow] = useState(false);
   const [searchByFirstName, setSearchByFirstName] = useState("");
   const [searchByEmail, setSearchByEmail] = useState("");
   const [searchById, setSearchById] = useState("");
+  const [accountant, setAccountant] = useState({});
 
-  /**
-   * start of alert
-   */
+  const {id} = useParams();
 
-  const [showAlert, setShowAlert] = useState(false);
 
-//   useEffect(() => {
-//     const timeout = setTimeout(() => {
-//       setShowAlert(false);
-//     }, 3000);
 
-//     return () => {
-//       clearTimeout(timeout);
-//     };
-//   }, [showAlert]);
-
-//   const handleClick = () => {
-//     setShowAlert(true);
-//   };
-
-  /**
-   * end of alert
-   */
-
-//   const handleClose = () => {
-//     // console.log("in handle close" + id);
-//     setShow(false);
-//   };
-
-//   const handleShow = (p) => {
-//     setPatient(p);
-//     setShow(true);
-//   };
 
   const clearAllFilters = () => {
     setOpen(false);
@@ -73,23 +44,16 @@ function PatientList() {
 
   useEffect(() => {
     init();
+    userService
+      .getUserEmailById(id)
+      .then((resp) => {
+        setAccountant(resp.data);
+      })
+      .catch((error) => {
+        console.log("error");
+      });
   }, []);
 
-//   const handleDelete = () => {
-//     // console.log("Printing id", id);
-//     patientService
-//       .remove(patient.patientId)
-//       .then((response) => {
-//         console.log("employee deleted successfully", response.data);
-//         handleClick(); //alert
-//         // setPatient({});
-//         setShow(false);
-//         init();
-//       })
-//       .catch((error) => {
-//         console.log("Something went wrong", error);
-//       });
-//   };
 
 
 
@@ -111,67 +75,10 @@ function PatientList() {
     <div className="p-3 mb-2 bg-secondary">
       <div className="container-fluid">
 
-      <ProfileHeader></ProfileHeader>
+      <HeaderNavbar firstName={accountant.firstName} lastName={accountant.lastName} sid={accountant.userId} role={accountant.role} emailId={accountant.email} ></HeaderNavbar>
       
       </div>
-      {/* <>
-        {showAlert && (
-          <Alert
-            variant="danger"
-            onClose={() => setShowAlert(false)}
-            dismissible
-            className="fade"
-          >
-            Patient <span>{patient.firstName}</span>{" "}
-            <span>{patient.lastName}</span> deleted succefully
-          </Alert>
-        )}
-      </> */}
-
-      {/*  */}
-
-      {/* <>
-        <Modal show={show} onHide={handleClose} animation={false}>
-          <Modal.Header
-            closeButton
-            style={{ backgroundColor: "red", color: "white" }}
-          >
-            <Modal.Title
-              id="example-custom-modal-styling-title"
-              style={{ backgroundColor: "red" }}
-            >
-              Are you Sure?
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body style={{ backgroundColor: "white" }}>
-            patient : <span>{patient.firstName}</span>
-            <span style={{ margin: "2px" }}>{patient.lastName} </span>
-            will be deleted permanently
-          </Modal.Body>
-          <Modal.Footer style={{ backgroundColor: "white" }}>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="danger" onClick={handleDelete}>
-              Delete
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </> */}
-
-      {/*  */}
-
-      {/* <div>
-        <Link to="/addPatient" className="btn btn-primary mb-2">
-          Add Patient
-        </Link>
-      </div> */}
-
-      {/*  */}
-
-      {/* start of  filter bar */}
-
-      {/* 2 container */}
+      
 
       <div className="container-fluid ">
         <div className="p-3 mb-2 bg-light text-white">

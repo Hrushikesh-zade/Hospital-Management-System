@@ -22,8 +22,6 @@ const ChangePassword = () => {
     userService
       .getUserEmailById(id)
       .then((resp) => {
-        console.log("kjsdfhkhfkh");
-        console.log(resp.data);
         handleChange("email", resp.data.email);
       })
       .catch((error) => {
@@ -38,7 +36,6 @@ const ChangePassword = () => {
         .then((resp) => {
           localStorage.removeItem("token");
          navigate("/login");
-        // navigate(`/doctors/profile/${id}`)
         })
         .catch((err) => {
           console.log("Error" + err);

@@ -16,7 +16,6 @@ const InactiveEmployees = () => {
     getEmployees();
   }, []);
 
-
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
@@ -28,8 +27,6 @@ const InactiveEmployees = () => {
       clearTimeout(timeout);
     };
   }, [showAlert]);
-
-
 
   const clearAllFilters = () => {
     setOpen(false);
@@ -43,9 +40,7 @@ const InactiveEmployees = () => {
     employeeService
       .reassign(empId)
       .then((response) => {
-        navigate("/admin");
-
-        
+        navigate(-1);
       })
       .catch((error) => {
         console.log("Something went wrong", error);
@@ -66,7 +61,6 @@ const InactiveEmployees = () => {
 
   return (
     <div>
-      
       {/* start of  filter bar */}
 
       {/* 2 container */}
@@ -95,10 +89,17 @@ const InactiveEmployees = () => {
                 <i className="bi bi-funnel"></i>
                 Filter it
               </button>
-              <Link to="/admin" className="btn btn-primary">
+              {/* <Link to="/admin" className="btn btn-primary">
                 Go Back
-              </Link>
-              
+              </Link> */}
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  navigate(-1);
+                }}
+              >
+                Back to List
+              </button>
             </div>
           </div>
 
@@ -153,7 +154,7 @@ const InactiveEmployees = () => {
                           aria-label="Search"
                           value={searchByEmail}
                           onChange={(e) => setSearchByEmail(e.target.value)}
-                          />
+                        />
                       </div>
                     </div>
                   </div>
@@ -195,7 +196,7 @@ const InactiveEmployees = () => {
           </thead>
           <tbody>
             {employeeList
-              .filter((cf)=>{
+              .filter((cf) => {
                 if (
                   (searchByFirstName === "" ||
                     searchByFirstName.trim() === "") &&
@@ -203,23 +204,19 @@ const InactiveEmployees = () => {
                   (searchByEmail === "" || searchByEmail.trim() === "")
                 ) {
                   return cf;
-                }
-                 else if (
-                    (cf.firstName
-                        .toLowerCase()
-                        .includes(searchByFirstName.toLowerCase()) ||
-                        cf.lastName
-                          .toLowerCase()
-                          .includes(searchByFirstName.toLowerCase()))
-                           &&
-                  cf.empId.toString().includes(searchById.toLowerCase())
-                   &&
+                } else if (
+                  (cf.firstName
+                    .toLowerCase()
+                    .includes(searchByFirstName.toLowerCase()) ||
+                    cf.lastName
+                      .toLowerCase()
+                      .includes(searchByFirstName.toLowerCase())) &&
+                  cf.empId.toString().includes(searchById.toLowerCase()) &&
                   cf.email.toLowerCase().includes(searchByEmail.toLowerCase())
                 ) {
                   return cf;
-                }
-                else{
-                    return false;
+                } else {
+                  return false;
                 }
               })
 
@@ -253,7 +250,7 @@ const InactiveEmployees = () => {
                   <td>
                     <button
                       className="btn btn-success ml-2"
-                      onClick={()=>{
+                      onClick={() => {
                         activate(patient.empId);
                       }}
                     >

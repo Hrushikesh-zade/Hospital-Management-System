@@ -143,9 +143,14 @@ function InactivePatients() {
                   <i className="bi bi-funnel"></i>
                   Filter it
                 </button>
-                <Link to="/" className="btn btn-primary">
+                <button className="btn btn-primary" onClick={()=>{
+                    navigate(-1);
+                }}>
+                Go Back
+                </button>
+                {/* <Link to="/" className="btn btn-primary">
                   Go Back
-                </Link>
+                </Link> */}
               </div>
             
           </div>

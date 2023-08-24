@@ -50,7 +50,7 @@ const EditEmployee = () => {
         employeeService
           .update(id,employeeDetails)
           .then((resp) => {
-            navigate("/admin");
+            navigate(-1);
           })
           .catch((err) => {
             console.log("some error occured");
@@ -121,9 +121,14 @@ const EditEmployee = () => {
         submit details
       </button>
 
-      <Link to="/admin" className="btn btn-secondary">
+      {/* <Link to="/admin" className="btn btn-secondary">
         Back to List
-      </Link>
+      </Link> */}
+      <button className="btn btn-secondary" onClick={()=>{
+        navigate(-1);
+      }}>
+Back to List
+      </button>
     </div>
     );
 }

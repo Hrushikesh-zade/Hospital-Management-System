@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
 import avtar from "../../images/UserAvtar.png";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import patientUserService from "../../services/patientUserService";
 import "../../css/profile.css";
+import { Container, NavDropdown, Navbar } from "react-bootstrap";
+import userService from "../../services/userService";
 function PatientLoginDetails() {
   
-
   const [patientUser, setPatientUser] = useState([]);
+  const [pass, setPass] = useState(
+    {
+        email: "",
+        password: ""
+    }
+  );
+
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -14,17 +23,71 @@ function PatientLoginDetails() {
     patientUserService
       .get(id)
       .then((resp) => {
-        console.log("loaded successfully");
-        console.log(id);
-        console.log(resp.data);
         setPatientUser(resp.data);
+        setPass({...pass,email:resp.data.email});
+
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
+  // useEffect(() => {
+  //   setPass(prevPass => ({
+  //     ...prevPass,
+  //     email: patientUser.emailId
+  //   }));
+  // }, [patientUser.emailId]);
+
+  const changePassword = () => {
+    userService.getUserByEmail(pass).then((resp)=>{
+        navigate(`/changePassword/${resp.data.userId}`);
+    }).catch((err)=>{
+        console.log("error");
+    })
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
+    <div>
+    <Navbar bg="dark" data-bs-theme="dark" className="bg-body-tertiary">
+        <Container>
+          <Navbar.Brand href="#home">Silver Spring Hospital</Navbar.Brand>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-end">
+            <i
+              className="bi bi-person-circle"
+              style={{ color: "White", marginRight: "4px" }}
+            ></i>
+            <NavDropdown
+              title={patientUser.firstName}
+              style={{ color: "White" }}
+              id="basic-nav-dropdown"
+            >
+              
+              <NavDropdown.Item>
+                <button className="nav-link mx-3" onClick={changePassword}>
+                  Change Password
+                </button>
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item>
+                <button
+                  className="btn btn-danger mx-auto"
+                  onClick={logout}
+                  style={{ width: "100%" }}
+                >
+                  Log Out
+                </button>
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     <div className="container">
       <div className="row">
         <div className="col">
@@ -150,6 +213,7 @@ function PatientLoginDetails() {
         {/* <!-- user card ends --> */}
       </div>
       {/* <!-- Main col ends-  --> */}
+    </div>
     </div>
   );
 }

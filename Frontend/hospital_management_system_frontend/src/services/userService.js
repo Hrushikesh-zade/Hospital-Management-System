@@ -16,19 +16,16 @@ const getTokenRequest=(data)=>{
 
 const getToken=()=>{
     let t_k = localStorage.getItem("token");
-    console.log("t_k -->"+ t_k);
     config.headers.Authorization = "Bearer "+ t_k;
 
     return config;
 }
 
 const getUser=(data)=>{
-    console.log(getToken());
     return axios.post(`${login_url}/login`,data,config);
 }
 
 const getUserByEmail=(data)=>{
-    console.log(getToken());
     return axios.put(`${login_url}/getUserByEmail`,data,config);
 }
 

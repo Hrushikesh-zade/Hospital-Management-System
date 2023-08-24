@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [user, setUser] = useState({
     email: "",
-    password: "",
+    password: ""
   });
 
   const [token,setToken] = useState();
@@ -14,6 +14,9 @@ const Login = () => {
 
   
    function getUser(d) {
+    console.log("+++++++++++++++++++++");
+    console.log(userService.getToken());
+    console.log(d);
     userService
       .getUser(d)
       .then((resp) => {
@@ -21,15 +24,19 @@ const Login = () => {
         console.log(resp.data);
 
         if(resp.data.role === "ADMIN"){
-            navigate("/admin");
+          
+         navigate("/admin/"+resp.data.userId);
+            
         }else if(resp.data.role === "RECEPTIONIST"){
-            navigate("/");
+
+             navigate("/receptionist/"+resp.data.userId);
         }else if(resp.data.role === "DOCTOR"){
+
             navigate("/doctors/"+resp.data.roleId);
         }else if(resp.data.role === "PATIENT"){
             navigate("/patientView/"+resp.data.roleId);
         }else if(resp.data.role === "ACCOUNTANT"){
-            navigate("/accountant");
+            navigate("/accountant/"+resp.data.userId);
         }else{
             console.log("Error");
         }
@@ -40,8 +47,12 @@ const Login = () => {
   }
 
   useEffect(()=>{
-    console.log("anssss");
-    getUser(user);
+    if(localStorage.getItem("token") != null){
+
+      console.log("/******/***********/")
+      console.log(user)
+      getUser(user);
+    }
 
   },[token]);
 

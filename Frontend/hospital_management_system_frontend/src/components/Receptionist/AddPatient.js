@@ -30,6 +30,8 @@ const AddPatient = () => {
   const [doctorList, setDoctorList] = useState([]);
   const [wardList, setWardList] = useState([]);
 
+
+
   useEffect(() => {
     getAllDoctors();
     getAllWards();
@@ -64,7 +66,7 @@ const AddPatient = () => {
     patientService
       .create(addpatient)
       .then((resp) => {
-        navigate("/");
+        navigate(-1);
       })
       .catch((err) => {
         console.log("some error occured");
@@ -218,9 +220,12 @@ const AddPatient = () => {
         submit details
       </button>
 
-      <Link to="/" className="btn btn-secondary">
+      {/* <Link to="/" className="btn btn-secondary">
         Back to List
-      </Link>
+      </Link> */}
+      <button className="btn btn-secondary" onClick={()=>{
+        navigate(-1);
+      }}>Back to List</button>
       <br/>
       <br/>
       <br/>

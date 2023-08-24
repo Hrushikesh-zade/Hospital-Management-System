@@ -1,5 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
+
 import PatientHomePage from "./components/Receptionist/PatientHomePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AddPatient from "./components/Receptionist/AddPatient";
@@ -21,6 +22,9 @@ import DoctorProfile from "./components/Doctor/DoctorProfile";
 import ChangePassword from "./components/General/ChangePassword";
 import InactivePatients from "./components/Receptionist/InactivePatient";
 import InactiveEmployees from "./components/Admin/InactiveEmployees";
+import ReceptionistProfile from "./components/Receptionist/ReceptionistProfile";
+import AdminProfile from "./components/Admin/AdminProfile";
+import AccountantProfile from "./components/Accountant/AccountantProfile";
 
 function App() {
   return (
@@ -32,25 +36,30 @@ function App() {
         {/* receptionist page routes */}
           {/* <Route exact path="/" element={<TImePass />} /> */}
 
+          {/* patient as user routes */}
+          <Route path="/patientView/:id" element={<PatientLoginDetails />} />
+
           {/* receptionist page routes */}
-          <Route exact path="/" element={<PatientHomePage />} />
+          <Route exact path="/receptionist/:id" element={<PatientHomePage />} />
           <Route path="/addPatient" element={<AddPatient />} />
           <Route path="/patientDetails/:id" element={<PatientDetails />} />
           <Route path="/patient/edit/:id" element={<EditPatient />} />
-          <Route path="/patientView/:id" element={<PatientLoginDetails />} />
           <Route path="/inactivePatients" element={<InactivePatients />} />
+          <Route path="/receptionist/profile/:id" element={<ReceptionistProfile />} />
 
           {/* admin page routes */}
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/:id" element={<AdminPage />} />
           <Route path="/admin/add" element={<AddEmployee />} />
           <Route path="/admin/addDoctor" element={<AddDoctor />} />
           <Route path="/admin/edit/:id" element={<EditEmployee />} />
           <Route path="/admin/info/:id" element={<EmployeeInfo />} />
           <Route path="/admin/inactiveEmployees" element={<InactiveEmployees />} />
+          <Route path="/admin/profile/:id" element={<AdminProfile />} />
 
           {/* accountant page routes */}
-          <Route exact path="/accountant" element={<PatientList />} />
+          <Route exact path="/accountant/:id" element={<PatientList />} />
           <Route path="/accountant/invoice/:id" element={<Invoice />} />
+          <Route path="/accountant/profile/:id" element={<AccountantProfile />} />
 
           {/* doctor page routes */}
           <Route path="/doctors/:id" element={<DoctorPage />} />

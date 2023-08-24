@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Button, Collapse, Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import patientService from "../../services/patient.service";
 import ProfileHeader from "./ProfileHeader";
 import "bootstrap-icons/font/bootstrap-icons.css";
 // import logo from "../images/logo.png"
 import  '../../css/PatientcssHomePage.css';
+import HeaderNavbar from "../General/HeaderNavbar";
+import userService from "../../services/userService";
 
 function PatientHomePage() {
   const [patients, setPatients] = useState([]);
@@ -16,7 +18,9 @@ function PatientHomePage() {
   const [searchByFirstName, setSearchByFirstName] = useState("");
   const [searchByEmail, setSearchByEmail] = useState("");
   const [searchById, setSearchById] = useState("");
+  const [recpeptionist,setReceptionist] = useState({});
 
+  const {id} = useParams();
   /**
    * start of alert
    */
@@ -73,7 +77,17 @@ function PatientHomePage() {
 
   useEffect(() => {
     init();
+    userService
+      .getUserEmailById(id)
+      .then((resp) => {
+        setReceptionist(resp.data);
+      })
+      .catch((error) => {
+        console.log("error");
+      });
   }, []);
+
+  
 
   const handleDelete = () => {
     // console.log("Printing id", id);
@@ -110,8 +124,9 @@ function PatientHomePage() {
   return (
     <div className="p-3 mb-2 bg-secondary">
       <div className="container-fluid">
+      <HeaderNavbar firstName={recpeptionist.firstName} lastName={recpeptionist.lastName} sid={recpeptionist.userId} role={recpeptionist.role} emailId={recpeptionist.email} ></HeaderNavbar>
 
-      <ProfileHeader></ProfileHeader>
+      {/* <ProfileHeader></ProfileHeader> */}
       
       </div>
       <>

@@ -34,7 +34,7 @@ const [employeeDetails,setEmployeeDetails] = useState({
         employeeService
           .create(employeeDetails)
           .then((resp) => {
-            navigate("/admin");
+            navigate(-1);
           })
           .catch((err) => {
             console.log("some error occured" + err);
@@ -145,9 +145,14 @@ const [employeeDetails,setEmployeeDetails] = useState({
         submit details
       </button>
 
-      <Link to="/admin" className="btn btn-secondary">
+      {/* <Link to="/admin" className="btn btn-secondary">
         Back to List
-      </Link>
+      </Link> */}
+      <button className="btn btn-secondary" onClick={()=>{
+        navigate(-1);
+      }}>
+Back to List
+      </button>
       <br/>
       <br/>
       <br/>

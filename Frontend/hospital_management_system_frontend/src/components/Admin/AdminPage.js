@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import employeeService from "../../services/employeeService";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Alert, Button, Collapse, Modal } from "react-bootstrap";
+import HeaderNavbar from "../General/HeaderNavbar";
+import userService from "../../services/userService";
 
 const AdminPage = () => {
   const [employeeList, setEmployeeList] = useState([]);
@@ -11,9 +13,20 @@ const AdminPage = () => {
   const [searchByFirstName, setSearchByFirstName] = useState("");
   const [searchByEmail, setSearchByEmail] = useState("");
   const [searchById, setSearchById] = useState("");
+  const [admin,setAdmin] = useState({});
+
+  const {id} = useParams();
 
   useEffect(() => {
     getEmployees();
+    userService
+      .getUserEmailById(id)
+      .then((resp) => {
+        setAdmin(resp.data);
+      })
+      .catch((error) => {
+        console.log("error");
+      });
   }, []);
 
   const handleShow = (p) => {
@@ -130,6 +143,8 @@ const AdminPage = () => {
       {/* start of  filter bar */}
 
       {/* 2 container */}
+
+      <HeaderNavbar firstName={admin.firstName} lastName={admin.lastName} sid={admin.userId} role={admin.role} emailId={admin.email} ></HeaderNavbar>
 
       <div className="container-fluid ">
         <div className="p-3 mb-2 bg-light text-white">

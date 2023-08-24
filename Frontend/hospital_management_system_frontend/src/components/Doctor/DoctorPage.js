@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import doctorService from "../../services/doctorService";
 import { Link, useParams } from "react-router-dom";
 import { Collapse } from "react-bootstrap";
-import Navbar from "../General/Navbar";
+import HeaderNavbar from "../General/HeaderNavbar";
 
 const DoctorPage = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -72,8 +72,9 @@ const DoctorPage = () => {
 
   return (
     <div>
-      <Navbar firstName={doctor.firstName} lastName={doctor.lastName} sid={doctor.doctorId} role={doctor.role} ></Navbar>
 
+      
+      <HeaderNavbar firstName={doctor.firstName} lastName={doctor.lastName} sid={doctor.doctorId} role={doctor.role} emailId={doctor.email} ></HeaderNavbar>
 
       <div className="container-fluid ">
         <div className="p-3 mb-2 bg-light text-white">
