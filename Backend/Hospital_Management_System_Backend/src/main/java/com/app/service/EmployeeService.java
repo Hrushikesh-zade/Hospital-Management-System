@@ -18,8 +18,12 @@ public interface EmployeeService {
 	EmployeeResponseDto getEmployeeById(Integer empId);
 	
 	List<EmployeeResponseDto> displayEmployees();
+	
+	List<EmployeeResponseDto> displayDeletedEmployees();
 
 	String updateEmployee(Integer empId,EmployeeEditDto emp);
 	
 	Integer findEmpIdByUserId(Integer userId);
+	
+	String reAssignEmployee(Integer empId);
 }

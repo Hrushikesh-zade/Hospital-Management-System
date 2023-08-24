@@ -39,7 +39,7 @@ public class EmployeeResponseDto {
 	private Status status;
 	
 	
-	public static List<EmployeeResponseDto> createEmployee(List<Employee> emps){
+	public static List<EmployeeResponseDto> createEmployeeList(List<Employee> emps){
 		List<EmployeeResponseDto> list = new ArrayList<>();
 		
 		
@@ -91,4 +91,33 @@ public class EmployeeResponseDto {
 		return dto;
 		
 	}
+	
+	public static List<EmployeeResponseDto> createDeletedEmployeeList(List<Employee> emps){
+		List<EmployeeResponseDto> list = new ArrayList<>();
+		
+		
+		
+		for(Employee e : emps) {
+			EmployeeResponseDto er = new EmployeeResponseDto();
+			er.setEmpId(e.getEmpId());
+			er.setFirstName(e.getUser().getFirstName());
+			er.setLastName(e.getUser().getLastName());
+			er.setEmail(e.getUser().getEmail());
+			er.setRole(e.getUser().getRole());
+			er.setDob(e.getUser().getDob());
+			er.setGender(e.getUser().getGender());
+			er.setContactNo(e.getUser().getContactNo());
+			er.setHiringDate(e.getHiringDate());
+			er.setSalary(e.getSalary());
+			er.setStatus(e.getUser().getStatus());
+			
+			if(er.getStatus().name().equals("INACTIVE")) {	
+				list.add(er);
+			}
+			
+		}
+		return list;
+	}
+	
+	
 }

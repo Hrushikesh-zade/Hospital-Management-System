@@ -60,4 +60,14 @@ public class EmployeeController {
 		return new ResponseEntity<>(new ApiResponse(service.updateEmployee(empId, emp)), HttpStatus.OK);
 	}
 	
+	@GetMapping("/inactive")
+	public ResponseEntity<?> getAllDeletedEmployeeDetails(){
+		return new ResponseEntity<>(service.displayDeletedEmployees(), HttpStatus.OK);
+	}
+	
+	@PutMapping("reassign/{empId}")
+	public ResponseEntity<?> updateEmployee(@PathVariable Integer empId){
+		return new ResponseEntity<>(new ApiResponse(service.reAssignEmployee(empId)), HttpStatus.OK);
+	}
+	
 }

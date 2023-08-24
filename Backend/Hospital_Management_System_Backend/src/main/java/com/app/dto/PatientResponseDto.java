@@ -49,7 +49,7 @@ public class PatientResponseDto {
 	private Status status;
 	
 	
-	public static List<PatientResponseDto> createPatient(List<Patient> pt){
+	public static List<PatientResponseDto> createPatientList(List<Patient> pt){
 		List<PatientResponseDto> list = new ArrayList<>();
 		
 		for(Patient p : pt) {
@@ -113,4 +113,40 @@ public class PatientResponseDto {
 		return pr;
 		
 	}
+	
+	public static List<PatientResponseDto> createDeletedPatientList(List<Patient> pt){
+		List<PatientResponseDto> list = new ArrayList<>();
+		
+		for(Patient p : pt) {
+			PatientResponseDto pr = new PatientResponseDto();
+			
+			pr.setPatientId(p.getPatientId());
+			pr.setFirstName(p.getUser().getFirstName());
+			pr.setLastName(p.getUser().getLastName());
+			pr.setEmail(p.getUser().getEmail());
+			pr.setRole(p.getUser().getRole());
+			pr.setDob(p.getUser().getDob());
+			pr.setGender(p.getUser().getGender());
+			pr.setContactNo(p.getUser().getContactNo());
+			pr.setDateOfAdmission(p.getDateOfAdmission());
+			pr.setBloodGroup(p.getBloodGroup());
+			pr.setDisease(p.getDisease());
+			pr.setPaymentStatus(p.getPaymentStatus());
+			pr.setPrescription(p.getPrescription());
+//			pr.setDoctors(p.getDoctors());
+			pr.setWardId(p.getWard().getWardId());
+			pr.setStatus(p.getUser().getStatus());
+			
+			if(pr.getStatus().name().equals("INACTIVE")) {
+				list.add(pr);
+			}
+			
+
+		}
+		
+		return list;
+	}
+	
+	
+	
 }

@@ -17,7 +17,7 @@ import com.app.entities.WardType;
 import com.app.exception_handler.ResourceNotFoundException;
 import static com.app.dto.WardResponseDto.createWardList;
 
-import static com.app.dto.PatientResponseDto.createPatient;
+import static com.app.dto.PatientResponseDto.createPatientList;
 
 @Service
 @Transactional
@@ -87,7 +87,7 @@ public class WardServiceImpl implements WardService {
 		
 		List<Patient> list = w.getPatients();
 		
-		return createPatient(list);
+		return createPatientList(list);
 	}
 
 }

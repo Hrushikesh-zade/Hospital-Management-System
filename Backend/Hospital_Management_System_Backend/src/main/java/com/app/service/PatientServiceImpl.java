@@ -97,7 +97,7 @@ public class PatientServiceImpl implements PatientService {
 		
 		List<Patient> list = repo.findAll();
 		
-		return createPatient(list);
+		return createPatientList(list);
 	}
 
 //	@Override
@@ -187,6 +187,28 @@ public class PatientServiceImpl implements PatientService {
 		Patient p = repo.findByUserUserId(userId).orElseThrow(()->new ResourceNotFoundException("patient not found"));
 		
 		return p.getPatientId();
+	}
+
+	@Override
+	public List<PatientResponseDto> getAllDeletedPatients() {
+		
+		List<Patient> list = repo.findAll();
+		
+		return createDeletedPatientList(list);
+	}
+
+	@Override
+	public String reAssignPatient(Integer patientId) {
+		// TODO Auto-generated method stub
+		
+		Status status = Status.valueOf("ACTIVE");
+		
+		Patient p = repo.findById(patientId).orElseThrow(()->new ResourceNotFoundException("invalid patient id"));
+		
+		 p.getUser().setStatus(status);
+		
+		return "Patient Reassigned";
+		
 	}
 
 }

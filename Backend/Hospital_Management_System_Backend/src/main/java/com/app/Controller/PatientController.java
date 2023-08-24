@@ -63,5 +63,15 @@ public class PatientController {
 		return new ResponseEntity<>(new ApiResponse(service.assignDoctor(patientId, doctorId)), HttpStatus.OK);
 	}
 	
+	@GetMapping("/inactive")
+	public ResponseEntity<?> getAllDeletedPatients(){
+		return new ResponseEntity<>(service.getAllDeletedPatients(), HttpStatus.OK);
+	}
+	
+	@PutMapping("reassigned/{patientId}")
+	public ResponseEntity<?> reassignPatient(@PathVariable Integer patientId){
+		return new ResponseEntity<>(new ApiResponse(service.reAssignPatient(patientId)), HttpStatus.OK);
+	}
+	
 	
 }

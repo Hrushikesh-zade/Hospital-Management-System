@@ -16,7 +16,8 @@ import com.app.entities.Employee;
 import com.app.entities.Status;
 import com.app.entities.User;
 import com.app.exception_handler.ResourceNotFoundException;
-import static com.app.dto.EmployeeResponseDto.createEmployee;
+import static com.app.dto.EmployeeResponseDto.createEmployeeList;
+import static com.app.dto.EmployeeResponseDto.createDeletedEmployeeList;
 import static com.app.dto.EmployeeResponseDto.createSingleEmployee;
 @Service
 @Transactional
@@ -91,7 +92,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		List<Employee> list = repo.findAll();
 		
-		return createEmployee(list);
+		return createEmployeeList(list);
 	}
 	
 	
@@ -131,6 +132,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		
 		return e.getEmpId();
+	}
+
+	@Override
+	public List<EmployeeResponseDto> displayDeletedEmployees() {
+		
+		List<Employee> list = repo.findAll();
+		
+		return createDeletedEmployeeList(list);
+	}
+
+	@Override
+	public String reAssignEmployee(Integer empId) {
+		
+		Status status = Status.valueOf("ACTIVE");
+		
+		Employee e = repo.findById(empId).orElseThrow(()-> new ResourceNotFoundException("EmployeeNotFound"));
+		
+		e.getUser().setStatus(status);
+		
+		return "employee is Reassigned";
+		
 	}
 
 }

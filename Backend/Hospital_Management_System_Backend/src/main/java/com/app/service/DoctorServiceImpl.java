@@ -17,7 +17,7 @@ import com.app.entities.Employee;
 import com.app.entities.Status;
 import com.app.exception_handler.ResourceNotFoundException;
 import static com.app.dto.DoctorResponseDto.*;
-import static com.app.dto.PatientResponseDto.createPatient;
+import static com.app.dto.PatientResponseDto.createPatientList;
 
 @Service
 @Transactional
@@ -132,7 +132,7 @@ public class DoctorServiceImpl implements DoctorService {
 		
 		
 		
-		return createPatient(d.getPatients());
+		return createPatientList(d.getPatients());
 	}
 
 	@Override

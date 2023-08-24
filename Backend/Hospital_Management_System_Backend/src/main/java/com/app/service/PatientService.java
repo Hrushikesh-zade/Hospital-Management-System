@@ -20,6 +20,8 @@ public interface PatientService {
 	
 	String removePatient(Integer patientId);
 	
+	String reAssignPatient(Integer patientId);
+	
 	
 	String updatePatient(Integer patientId,PatientEditDto pt);
 	
@@ -28,4 +30,8 @@ public interface PatientService {
 	String assignDoctor(Integer patientId,Integer doctorId);
 	
 	Integer findPatientIdByUserId(Integer userId);
+	
+	List<PatientResponseDto> getAllDeletedPatients();
+	
+	
 }
