@@ -25,7 +25,6 @@ import InactiveEmployees from "./components/Admin/InactiveEmployees";
 import ReceptionistProfile from "./components/Receptionist/ReceptionistProfile";
 import AdminProfile from "./components/Admin/AdminProfile";
 import AccountantProfile from "./components/Accountant/AccountantProfile";
-import Protected from "./components/ProtectedRoutes/Protected";
 
 function App() {
   return (
@@ -33,47 +32,46 @@ function App() {
       <div className="App">
         <Routes>
 
+
         {/* receptionist page routes */}
           {/* <Route exact path="/" element={<TImePass />} /> */}
 
           {/* patient as user routes */}
-          <Route path="/patientView/:id" element={<Protected Component={PatientLoginDetails} Role1="PATIENT" />} />
+          <Route path="/patientView/:id" element={<PatientLoginDetails />} />
 
           {/* receptionist page routes */}
-          <Route exact path="/receptionist/:id" element={<Protected Component={PatientHomePage} Role1="RECEPTIONIST"/>} />
-          <Route path="/addPatient" element={<Protected Component={AddPatient} Role1="RECEPTIONIST"/>} />
-          <Route path="/patientDetails/:id" element={<Protected Component={PatientDetails} Role1="RECEPTIONIST"/>} />
-          <Route path="/patient/edit/:id" element={<Protected Component={EditPatient} Role1="RECEPTIONIST"/>} />
-          <Route path="/inactivePatients" element={<Protected Component={InactivePatients} Role1="RECEPTIONIST"/>} />
-          <Route path="/receptionist/profile/:id" element={<Protected Component={ReceptionistProfile} Role1="RECEPTIONIST"/>} />
+          <Route exact path="/receptionist/:id" element={<PatientHomePage />} />
+          <Route path="/addPatient" element={<AddPatient />} />
+          <Route path="/patientDetails/:id" element={<PatientDetails />} />
+          <Route path="/patient/edit/:id" element={<EditPatient />} />
+          <Route path="/inactivePatients" element={<InactivePatients />} />
+          <Route path="/receptionist/profile/:id" element={<ReceptionistProfile />} />
 
           {/* admin page routes */}
-          <Route path="/admin/:id" element={<Protected Component={AdminPage} Role1="ADMIN"/>} />
-          <Route path="/admin/add" element={<Protected Component={AddEmployee} Role1="ADMIN"/>} />
-          <Route path="/admin/addDoctor" element={<Protected Component={AddDoctor} Role1="ADMIN"/>} />
-          <Route path="/admin/edit/:id" element={<Protected Component={EditEmployee} Role1="ADMIN"/>} />
-          <Route path="/admin/info/:id" element={<Protected Component={EmployeeInfo} Role1="ADMIN"/>} />
-          <Route path="/admin/inactiveEmployees" element={<Protected Component={InactiveEmployees} Role1="ADMIN"/>} />
-          <Route path="/admin/profile/:id" element={<Protected Component={AdminProfile} Role1="ADMIN"/>} />
+          <Route path="/admin/:id" element={<AdminPage />} />
+          <Route path="/admin/add" element={<AddEmployee />} />
+          <Route path="/admin/addDoctor" element={<AddDoctor />} />
+          <Route path="/admin/edit/:id" element={<EditEmployee />} />
+          <Route path="/admin/info/:id" element={<EmployeeInfo />} />
+          <Route path="/admin/inactiveEmployees" element={<InactiveEmployees />} />
+          <Route path="/admin/profile/:id" element={<AdminProfile />} />
 
           {/* accountant page routes */}
-          <Route exact path="/accountant/:id" element={<Protected Component={PatientList} Role1="ACCOUNTANT"/>} />
-          <Route path="/accountant/invoice/:id" element={<Protected Component={Invoice} Role1="ACCOUNTANT"/>} />
-          <Route path="/accountant/profile/:id" element={<Protected Component={AccountantProfile} Role1="ACCOUNTANT"/>} />
+          <Route exact path="/accountant/:id" element={<PatientList />} />
+          <Route path="/accountant/invoice/:id" element={<Invoice />} />
+          <Route path="/accountant/profile/:id" element={<AccountantProfile />} />
 
           {/* doctor page routes */}
-          <Route path="/doctors/:id" element={<Protected Component={DoctorPage} Role1="DOCTOR"/>} />
-          <Route path="/doctors/profile/:id" element={<Protected Component={DoctorProfile} Role1="DOCTOR"/>} />
+          <Route path="/doctors/:id" element={<DoctorPage />} />
+          <Route path="/doctors/profile/:id" element={<DoctorProfile/>} />
           <Route
             path="/doctors/:doc_id/patient/:pat_id"
-            element={<Protected Component={AddPrescription} Role1="DOCTOR"/>}
+            element={<AddPrescription />}
           />
 
           {/* login page route */}
           <Route path="/login" element={<Login />} />
           <Route path="/changePassword/:id" element={<ChangePassword />} />
-          <Route path="/unauthorised" element={<TImePass />} />
-          
         </Routes>
       </div>
     </BrowserRouter>

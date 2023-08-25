@@ -23,8 +23,6 @@ const Login = () => {
         console.log("hrushi");
         console.log(resp.data);
 
-        localStorage.setItem("role",resp.data.role);
-
         if(resp.data.role === "ADMIN"){
           
          navigate("/admin/"+resp.data.userId);
