@@ -27,6 +27,7 @@ import AccountantProfile from "./components/Accountant/AccountantProfile";
 import Protected from "./components/ProtectedRoutes/Protected";
 import UnAuthorised from "./components/General/UnAuthorisedUser";
 import NotFound from "./components/General/NotFound";
+import HomePage from "./components/General/HomePage";
 
 function App() {
   return (
@@ -70,11 +71,12 @@ function App() {
             element={<Protected Component={AddPrescription} Role1="DOCTOR"/>}
           />
 
-          {/* login page route */}
+          {/* general page route */}
           <Route path="/login" element={<Login />} />
           <Route path="/changePassword/:id" element={<ChangePassword />} />
           <Route path="/unauthorised" element={<UnAuthorised />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<HomePage />} />
           
         </Routes>
       </div>

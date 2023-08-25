@@ -72,7 +72,7 @@ function HeaderNavbar(props) {
               style={{ color: "White", marginRight: "4px" }}
             ></i>
             <NavDropdown
-              title={props.firstName}
+              title={props.firstName===""?"UserName":props.firstName}
               style={{ color: "White" }}
               id="basic-nav-dropdown"
             >
