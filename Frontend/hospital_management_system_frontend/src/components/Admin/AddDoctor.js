@@ -9,18 +9,6 @@ const AddDoctor = () => {
 
 
 
-//     "firstName": "string",
-//   "lastName": "string",
-//   "email": "string",
-//   "password": "string",
-//   "confirmPassword": "string",
-//   "role": "ADMIN",
-//   "dob": "2023-08-20",
-//   "gender": "MALE",
-//   "contactNo": 0,
-//   "hiringDate": "2023-08-20",
-//   "salary": 0,
-//   "charges": 0
 
 
 const [employeeDetails,setEmployeeDetails] = useState({
@@ -59,116 +47,165 @@ const [employeeDetails,setEmployeeDetails] = useState({
 
     return (
         <div>
-        <label>Enter firstname</label>
-        <input
-          value={employeeDetails.firstName}
-          onChange={(e) => handleChange("firstName", e.target.value)}
-        />
-        <br />
         
-        <label>Enter lastname</label>
-        <input
-          value={employeeDetails.lastName}
-          onChange={(e) => handleChange("lastName", e.target.value)}
-        />
-        <br />
-        <label>Enter email</label>
-        <input
-          value={employeeDetails.email}
-          onChange={(e) => handleChange("email", e.target.value)}
-        />
-        {/* <br />
-        <label>Enter Password</label>
-        <input
-          value={employeeDetails.password}
-          onChange={(e) => handleChange("password", e.target.value)}
-        />
-        <br />
-        <label>Enter Confirm Password</label>
-        <input
-          value={employeeDetails.confirmPassword}
-          onChange={(e) => handleChange("confirmPassword", e.target.value)}
-        /> */}
-        <br />
-        
-        <label>Enter phone_no</label>
-        <input
-          value={employeeDetails.contactNo}
-          onChange={(e) => handleChange("contactNo", e.target.value)}
-        />
-        <br />
 
-        <label>Enter DOB</label>
-        <input
-          type="date"
-          value={employeeDetails.dob}
-          onChange={(e) => handleChange("dob", e.target.value)}
-        />
-        <br />
-        
-        <br />
-        <label>Enter Date_Of_Hiring</label>
-        <input
-          type="date"
-          value={employeeDetails.hiringDate}
-          onChange={(e) => handleChange("hiringDate", e.target.value)}
-        />
+<div className="container mt-3 shadow-lg p-3 mb-5 bg-body rounded" >
+        <div className="row justify-content-center" >
+          <div className="col-md-6" style={{width:"100%"}}>
+            <div className="card custom-card">
+              <div className="card-header custom-header" style={{width:"100%"}}>
+                <h4 style={{ color: "white" }}>Add Doctor</h4>
+              </div>
+              <div className="card-body row">
+                {/* <form> */}
+                <div className="form-group col-md-6 mt-2">
+                  <label>Enter First Name</label>
+                  <input
+                    id="admin-addDoctor-firstName-box"
+                    type="text"
+                    className="form-control mt-1 "
+                    value={employeeDetails.firstName}
+                    onChange={(e) => handleChange("firstName", e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group col-md-6 mt-2">
+                  <label>Enter Last Name</label>
+                  <input
+                    id="admin-addDoctor-lastName-box"
+                    type="text"
+                    className="form-control mt-1 "
+                    value={employeeDetails.lastName}
+                    onChange={(e) => handleChange("lastName", e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group col-md-6 mt-2">
+                  <label>Enter Email</label>
+                  <input
+                    id="admin-addDoctor-email-box"
+                    type="email"
+                    className="form-control mt-1 "
+                    value={employeeDetails.email}
+                    onChange={(e) => handleChange("email", e.target.value)}
+                    required
+                  />
+                </div>
 
-
-        <br />
-        <label>Enter Salary</label>
-        <input
-          type="number"
-          value={employeeDetails.salary}
-          onChange={(e) => handleChange("salary", e.target.value)}
-        />
-
-        <br />
-        <label>Enter Charges</label>
-        <input
-          type="number"
-          value={employeeDetails.charges}
-          onChange={(e) => handleChange("charges", e.target.value)}
-        />
-
-        <br />
-    
-      <br/>
-      <label>Enter Gender </label>
-      <select
-        className="form-select"
-        aria-label="Default select example"
-        value={employeeDetails.gender}
-        onChange={(e) => handleChange("gender", e.target.value)}
-      >       <option >Select gender </option>
-          <option  value="MALE">MALE</option>
-          <option  value="FEMALE">FEMALE</option>
-          <option  value="OTHER">OTHER</option>
+                <div className="form-group col-md-6 mt-2">
+                  <label>Enter Phone No</label>
+                  <input
+                    id="admin-addDoctor-phoneNo-box"
+                    type="number"
+                    className="form-control mt-1 "
+                    value={employeeDetails.contactNo}
+                    onChange={(e) => handleChange("contactNo", e.target.value)}
+                    required
+                  />
+                </div>
                 
-      </select>
-      
-      <br/>
+                
+
+                <div className="form-group col-md-6 mt-2">
+                  <label>Enter DOB</label>
+                  <input
+                    id="admin-addDoctor-Dob-box"
+                    type="date"
+                    className="form-control mt-1 "
+                    value={employeeDetails.dob}
+                    onChange={(e) => handleChange("dob", e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <label>Enter Date Of Hiring</label>
+                  <input
+                    id="admin-addDoctor-DateOfHiring-box"
+                    type="date"
+                    className="form-control mt-1 "
+                    value={employeeDetails.hiringDate}
+                    onChange={(e) => handleChange("hiringDate", e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="form-group mt-3">
+                  <label>Enter Salary</label>
+                  <input
+                    id="admin-addDoctor-Salary-box"
+                    type="number"
+                    className="form-control mt-1 "
+                    value={employeeDetails.salary}
+                    onChange={(e) => handleChange("salary", e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group mt-3">
+                  <label>Enter Charges</label>
+                  <input
+                    id="admin-addDoctor-Charges-box"
+                    type="number"
+                    className="form-control mt-1 "
+                    value={employeeDetails.charges}
+                    onChange={(e) => handleChange("charges", e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group mt-2">
+                  <label>Enter Gender </label>
+                  <select
+                    id="admin-addDoctor-Gender-box"
+                    className="form-select"
+                    aria-label="Default select example"
+                    value={employeeDetails.gender}
+                    onChange={(e) => handleChange("gender", e.target.value)}
+                  >             
+                    <option >Select gender </option>
+                    <option  value="MALE">MALE</option>
+                    <option  value="FEMALE">FEMALE</option>
+                    <option  value="OTHER">OTHER</option>
+                
+                  </select>
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <button
+                    type="submit"
+                    className="btn btn-primary custom-button custom-spacing custom-spacing-button"
+                    onClick={saveTheEmployee}
+                  >
+                    Submit
+                  </button>
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <button
+                    className="btn btn-secondary  custom-spacing custom-spacing-button"
+                    onClick={() => {
+                      navigate(-1);
+                    }}
+                  >
+                    Go Back
+                  </button>
+                </div>
+
+                <div>
+                  
+                </div>
+
+                
+                
+                {/* </form> */}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
-      {/* <Practise2></Practise2> */}
 
-      <button className="btn btn-primary" onClick={saveTheEmployee}>
-        {" "}
-        submit details
-      </button>
 
-      {/* <Link to="/admin" className="btn btn-secondary">
-        Back to List
-      </Link> */}
-
-<button className="btn btn-secondary" onClick={()=>{
-        navigate(-1);
-      }}>
-Back to List
-      </button>
-      <br/>
-      <br/>
-      <br/>
     </div>
     );
 }
