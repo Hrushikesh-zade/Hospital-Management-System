@@ -17,7 +17,6 @@ import Invoice from "./components/Accountant/Invoice";
 import AddPrescription from "./components/Doctor/AddPrescription";
 import DoctorPage from "./components/Doctor/DoctorPage";
 import Login from "./components/Signin/Login";
-import TImePass from "./components/TimePass/TImePassPage";
 import DoctorProfile from "./components/Doctor/DoctorProfile";
 import ChangePassword from "./components/General/ChangePassword";
 import InactivePatients from "./components/Receptionist/InactivePatient";
@@ -26,6 +25,8 @@ import ReceptionistProfile from "./components/Receptionist/ReceptionistProfile";
 import AdminProfile from "./components/Admin/AdminProfile";
 import AccountantProfile from "./components/Accountant/AccountantProfile";
 import Protected from "./components/ProtectedRoutes/Protected";
+import UnAuthorised from "./components/General/UnAuthorisedUser";
+import NotFound from "./components/General/NotFound";
 
 function App() {
   return (
@@ -72,7 +73,8 @@ function App() {
           {/* login page route */}
           <Route path="/login" element={<Login />} />
           <Route path="/changePassword/:id" element={<ChangePassword />} />
-          <Route path="/unauthorised" element={<TImePass />} />
+          <Route path="/unauthorised" element={<UnAuthorised />} />
+          <Route path="*" element={<NotFound />} />
           
         </Routes>
       </div>

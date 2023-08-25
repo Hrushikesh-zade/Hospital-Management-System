@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import userService from "../../services/userService";
+import "../../css/customPassword.css";
 
 const ChangePassword = () => {
   const { id } = useParams();
@@ -13,10 +14,21 @@ const ChangePassword = () => {
   const navigate = useNavigate();
 
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [flag, setFlag] = useState(false);
 
   const handleChange = (key, value) => {
     setUser({ ...user, [key]: value });
   };
+
+  useEffect(() => {
+    if (flag === true) {
+      const timer = setTimeout(() => {
+        setFlag(false);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [flag]);
 
   useEffect(() => {
     userService
@@ -30,45 +42,97 @@ const ChangePassword = () => {
   }, []);
 
   const saveAndSubmit = () => {
-    
+    if (user.password === confirmPassword) {
       userService
         .changePassword(user)
         .then((resp) => {
           localStorage.removeItem("token");
-         navigate("/login");
+          navigate("/login");
         })
         .catch((err) => {
           console.log("Error" + err);
         });
-    
+    } else {
+      setFlag(true);
+      // alert('Passwords do not match');
+    }
   };
 
   return (
     <div>
-      <br />
-      <label>Enter Email</label>
-      <input
-        value={user.email}
-        onChange={(e) => handleChange("email", e.target.value)}
-      />
-      <br />
+      <div className="container mt-5">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <div className="card custom-card">
+              <div className="card-header custom-header">
+                <h4 style={{ color: "white" }}>Change Password</h4>
+              </div>
+              <div className="card-body">
+                {/* <form> */}
+                <div className="form-group">
+                  <label>Email</label>
+                  <input
+                    id="email-box"
+                    type="email"
+                    className="form-control "
+                    value={user.email}
+                    onChange={(e) => handleChange("email", e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group custom-spacing">
+                  <label>New Password</label>
+                  <input
+                    id="password-box"
+                    type="password"
+                    className="form-control "
+                    value={user.password}
+                    onChange={(e) => handleChange("password", e.target.value)}
+                    placeholder="Enter password"
+                    required
+                  />
+                </div>
+                <div className="form-group custom-spacing">
+                  <label>Confirm Password</label>
+                  <input
+                    id="confirmPassword-box"
+                    type="password"
+                    // className="form-control"
+                    className={
+                      flag
+                        ? "form-control custom-shade custom-shake"
+                        : "form-control"
+                    }
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Enter confirm password"
+                    required
+                  />
+                </div>
 
-      <br />
-      <label>Enter password</label>
-      <input
-        value={user.password}
-        onChange={(e) => handleChange("password", e.target.value)}
-      />
-      <br />
-      <br />
-      <label>Enter password</label>
-      <input
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
-      <br />
+                
 
-      <button onClick={saveAndSubmit}>submit</button>
+                <button
+                  type="submit"
+                  className="btn btn-primary custom-button custom-spacing custom-spacing-button"
+                  onClick={saveAndSubmit}
+                >
+                  Change Password
+                </button>
+                <button
+                  className="btn btn-secondary  custom-spacing custom-spacing-button"
+                  onClick={() => {
+                    navigate(-1);
+                  }}
+                >
+                  Go Back
+                </button>
+                {/* </form> */}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

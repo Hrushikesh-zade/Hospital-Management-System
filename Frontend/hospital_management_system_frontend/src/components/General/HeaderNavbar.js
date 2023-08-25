@@ -17,7 +17,6 @@ function HeaderNavbar(props) {
 
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("role");
     navigate("/login");
   };
 
@@ -83,7 +82,7 @@ function HeaderNavbar(props) {
                 </button>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <button className="nav-link mx-3" onClick={changePassword}>
+                <button className="nav-link mx-1" onClick={changePassword}>
                   Change Password
                 </button>
               </NavDropdown.Item>
