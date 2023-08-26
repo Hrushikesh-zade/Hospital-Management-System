@@ -94,7 +94,7 @@ const AddPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <label>Enter First Name</label>
                   <input
-                    id="admin-addEmployee-firstName-box"
+                    id="admin-addPatient-firstName-box"
                     type="text"
                     className="form-control mt-1 "
                     value={addpatient.firstName}
@@ -105,7 +105,7 @@ const AddPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <label>Enter Last Name</label>
                   <input
-                    id="admin-addEmployee-lastName-box"
+                    id="admin-addPatient-lastName-box"
                     type="text"
                     className="form-control mt-1 "
                     value={addpatient.lastName}
@@ -116,7 +116,7 @@ const AddPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <label>Enter Email</label>
                   <input
-                    id="admin-addEmployee-email-box"
+                    id="admin-addPatient-email-box"
                     type="email"
                     className="form-control mt-1 "
                     value={addpatient.email}
@@ -128,7 +128,7 @@ const AddPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <label>Enter Phone No</label>
                   <input
-                    id="admin-addEmployee-phoneNo-box"
+                    id="admin-addPatient-phoneNo-box"
                     type="number"
                     className="form-control mt-1 "
                     value={addpatient.contactNo}
@@ -141,7 +141,7 @@ const AddPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <label>Enter DOB</label>
                   <input
-                    id="admin-addEmployee-Dob-box"
+                    id="admin-addPatient-Dob-box"
                     type="date"
                     className="form-control mt-1 "
                     value={addpatient.dob}
@@ -153,7 +153,7 @@ const AddPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <label>Enter Date Of Admission</label>
                   <input
-                    id="admin-addEmployee-DateOfHiring-box"
+                    id="admin-addPatient-DateOfAdmission-box"
                     type="date"
                     className="form-control mt-1 "
                     value={addpatient.dateOfAdmission}
@@ -165,7 +165,7 @@ const AddPatient = () => {
                 <div className="form-group mt-3">
                   <label>Enter Disease</label>
                   <input
-                    id="admin-addEmployee-Salary-box"
+                    id="admin-addPatient-Disease-box"
                     type="text"
                     className="form-control mt-1 "
                     value={addpatient.disease}
@@ -176,7 +176,7 @@ const AddPatient = () => {
                 <div className="form-group mt-2">
                   <label>Enter Gender </label>
                   <select
-                    id="admin-addEmployee-Gender-box"
+                    id="admin-addPatient-Gender-box"
                     className="form-select"
                     aria-label="Default select example"
                     value={addpatient.gender}
@@ -193,7 +193,7 @@ const AddPatient = () => {
                 <div className="form-group mt-2">
                 <label>Select Doctor </label>
                 <select
-                  id="admin-addEmployee-Role-box"
+                  id="admin-addPatient-Doctor-box"
                   className="form-select"
                   aria-label="Default select example"
                   value={addpatient.doctorId}
@@ -212,7 +212,7 @@ const AddPatient = () => {
                 <div className="form-group mt-2">
                 <label>Select Ward </label>
                 <select
-                  id="admin-addEmployee-Role-box"
+                  id="admin-addPatient-Ward-box"
                   className="form-select"
                   aria-label="Default select example"
                   value={addpatient.wardId}
@@ -229,7 +229,7 @@ const AddPatient = () => {
                 <div className="form-group mt-2">
                 <label>Select bloodGroup</label>
                 <select
-                  id="admin-addEmployee-Role-box"
+                  id="admin-addPatient-BloodGroup-box"
                   className="form-select"
                   aria-label="Default select example"
                   value={addpatient.bloodGroup}
@@ -251,6 +251,7 @@ const AddPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <button
                     type="submit"
+                    id="admin-addPatient-submitButton-box"
                     className="btn btn-primary custom-button custom-spacing custom-spacing-button"
                     onClick={saveThePatient}
                   >
@@ -260,6 +261,7 @@ const AddPatient = () => {
 
                 <div className="form-group col-md-6 mt-2">
                   <button
+                    id="admin-addPatient-backButton-box"
                     className="btn btn-secondary  custom-spacing custom-spacing-button"
                     onClick={() => {
                       navigate(-1);

@@ -70,7 +70,7 @@ const EditPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <label>Enter First Name</label>
                   <input
-                    id="admin-addEmployee-firstName-box"
+                    id="admin-editPatient-firstName-box"
                     type="text"
                     className="form-control mt-1 "
                     value={addpatient.firstName}
@@ -81,7 +81,7 @@ const EditPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <label>Enter Last Name</label>
                   <input
-                    id="admin-addEmployee-lastName-box"
+                    id="admin-editPatient-lastName-box"
                     type="text"
                     className="form-control mt-1 "
                     value={addpatient.lastName}
@@ -92,7 +92,7 @@ const EditPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <label>Enter Email</label>
                   <input
-                    id="admin-addEmployee-email-box"
+                    id="admin-editPatient-email-box"
                     type="email"
                     className="form-control mt-1 "
                     value={addpatient.email}
@@ -104,7 +104,7 @@ const EditPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <label>Enter Phone No</label>
                   <input
-                    id="admin-addEmployee-phoneNo-box"
+                    id="admin-editPatient-phoneNo-box"
                     type="number"
                     className="form-control mt-1 "
                     value={addpatient.contactNo}
@@ -117,7 +117,7 @@ const EditPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <label>Enter DOB</label>
                   <input
-                    id="admin-addEmployee-Dob-box"
+                    id="admin-editPatient-Dob-box"
                     type="date"
                     className="form-control mt-1 "
                     value={addpatient.dob}
@@ -129,7 +129,7 @@ const EditPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <label>Enter Date Of Admission</label>
                   <input
-                    id="admin-addEmployee-DateOfHiring-box"
+                    id="admin-editPatient-DateOfAdmission-box"
                     type="date"
                     className="form-control mt-1 "
                     value={addpatient.dateOfAdmission}
@@ -141,7 +141,7 @@ const EditPatient = () => {
                 <div className="form-group mt-3">
                   <label>Enter Disease</label>
                   <input
-                    id="admin-addEmployee-Salary-box"
+                    id="admin-editPatient-Disease-box"
                     type="text"
                     className="form-control mt-1 "
                     value={addpatient.disease}
@@ -152,7 +152,7 @@ const EditPatient = () => {
                 <div className="form-group mt-2">
                   <label>Enter Gender </label>
                   <select
-                    id="admin-addEmployee-Gender-box"
+                    id="admin-editPatient-Gender-box"
                     className="form-select"
                     aria-label="Default select example"
                     value={addpatient.gender}
@@ -205,7 +205,7 @@ const EditPatient = () => {
                 <div className="form-group mt-2">
                 <label>Select bloodGroup</label>
                 <select
-                  id="admin-addEmployee-Role-box"
+                  id="admin-editPatient-BloodGroup-box"
                   className="form-select"
                   aria-label="Default select example"
                   value={addpatient.bloodGroup}
@@ -227,6 +227,7 @@ const EditPatient = () => {
                 <div className="form-group col-md-6 mt-2">
                   <button
                     type="submit"
+                    id="admin-editPatient-submitButton-box"
                     className="btn btn-primary custom-button custom-spacing custom-spacing-button"
                     onClick={saveThePatient}
                   >
@@ -236,6 +237,7 @@ const EditPatient = () => {
 
                 <div className="form-group col-md-6 mt-2">
                   <button
+                    id="admin-editPatient-submitButton-box"
                     className="btn btn-secondary  custom-spacing custom-spacing-button"
                     onClick={() => {
                       navigate(-1);
