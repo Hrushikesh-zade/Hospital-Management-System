@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import avtar from "../../images/UserAvtar.png";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import patientUserService from "../../services/patientUserService";
 import "../../css/profile.css";
 import { Container, NavDropdown, Navbar } from "react-bootstrap";
@@ -22,7 +22,7 @@ function PatientLoginDetails() {
   useEffect(() => {
     patientUserService
       .get(id)
-      .then((resp) => {
+      .then((resp) => { 
         setPatientUser(resp.data);
         setPass({...pass,email:resp.data.email});
 
@@ -56,7 +56,7 @@ function PatientLoginDetails() {
     <div>
     <Navbar bg="dark" data-bs-theme="dark" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="#home">Silver Spring Hospital</Navbar.Brand>
+          <Navbar.Brand ><Link to={"/"} style={{color:"white",textDecoration:"none"}}>Silver Spring Hospital</Link></Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <i
@@ -70,14 +70,14 @@ function PatientLoginDetails() {
             >
               
               <NavDropdown.Item>
-                <button className="nav-link mx-3" onClick={changePassword}>
+                <button className="nav-link mx-auto w-100" onClick={changePassword}>
                   Change Password
                 </button>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item>
                 <button
-                  className="btn btn-danger mx-auto"
+                  className="btn btn-danger mx-auto w-100"
                   onClick={logout}
                   style={{ width: "100%" }}
                 >

@@ -46,7 +46,7 @@ function App() {
           <Route path="/addPatient" element={<Protected Component={AddPatient} Role1="RECEPTIONIST"/>} />
           <Route path="/patientDetails/:id" element={<Protected Component={PatientDetails} Role1="RECEPTIONIST"/>} />
           <Route path="/patient/edit/:id" element={<Protected Component={EditPatient} Role1="RECEPTIONIST"/>} />
-          <Route path="/inactivePatients" element={<Protected Component={InactivePatients} Role1="RECEPTIONIST"/>} />
+          <Route path="/receptionist/:id/inactivePatients" element={<Protected Component={InactivePatients} Role1="RECEPTIONIST"/>} />
           <Route path="/receptionist/profile/:id" element={<Protected Component={ReceptionistProfile} Role1="RECEPTIONIST"/>} />
 
           {/* admin page routes */}
@@ -55,7 +55,7 @@ function App() {
           <Route path="/admin/addDoctor" element={<Protected Component={AddDoctor} Role1="ADMIN"/>} />
           <Route path="/admin/edit/:id" element={<Protected Component={EditEmployee} Role1="ADMIN"/>} />
           <Route path="/admin/info/:id" element={<Protected Component={EmployeeInfo} Role1="ADMIN"/>} />
-          <Route path="/admin/inactiveEmployees" element={<Protected Component={InactiveEmployees} Role1="ADMIN"/>} />
+          <Route path="/admin/:id/inactiveEmployees" element={<Protected Component={InactiveEmployees} Role1="ADMIN"/>} />
           <Route path="/admin/profile/:id" element={<Protected Component={AdminProfile} Role1="ADMIN"/>} />
 
           {/* accountant page routes */}

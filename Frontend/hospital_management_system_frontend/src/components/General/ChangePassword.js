@@ -24,7 +24,7 @@ const ChangePassword = () => {
     if (flag === true) {
       const timer = setTimeout(() => {
         setFlag(false);
-      }, 2000);
+      }, 1500);
 
       return () => clearTimeout(timer);
     }
@@ -60,10 +60,10 @@ const ChangePassword = () => {
 
   return (
     <div>
-      <div className="container mt-5">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <div className="card custom-card">
+      <div className="container mt-5 " >
+        <div className="row justify-content-center ">
+          <div className="col-md-6 ">
+            <div className="card custom-card m-3 shadow-lg bg-white rounded">
               <div className="card-header custom-header">
                 <h4 style={{ color: "white" }}>Change Password</h4>
               </div>

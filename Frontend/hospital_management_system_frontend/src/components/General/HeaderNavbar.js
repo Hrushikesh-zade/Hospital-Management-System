@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, NavDropdown, Navbar } from "react-bootstrap";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import userService from "../../services/userService";
 
 function HeaderNavbar(props) {
@@ -17,7 +17,7 @@ function HeaderNavbar(props) {
 
   const logout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    navigate("/");
   };
 
   useEffect(() => {
@@ -64,7 +64,7 @@ function HeaderNavbar(props) {
     <>
       <Navbar bg="dark" data-bs-theme="dark" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="#home">Silver Spring Hospital</Navbar.Brand>
+          <Navbar.Brand ><Link to={"/"} style={{color:"white",textDecoration:"none"}}>Silver Spring Hospital</Link></Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <i
@@ -77,21 +77,22 @@ function HeaderNavbar(props) {
               id="basic-nav-dropdown"
             >
               <NavDropdown.Item>
-                <button className="nav-link mx-5" onClick={sendProfile}>
+                <button id="profile-header-button" className="nav-link mx-auto w-100" onClick={sendProfile} >
                   Profile
                 </button>
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <button className="nav-link mx-1" onClick={changePassword}>
+              <NavDropdown.Item >
+                <button id="change-pass-header-button" className="nav-link mx-auto w-100" onClick={changePassword}>
                   Change Password
                 </button>
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item>
+              <NavDropdown.Item >
                 <button
-                  className="btn btn-danger mx-auto"
+                id="logout-header-button"
+                  className="btn btn-danger mx-auto w-100"
                   onClick={logout}
-                  style={{ width: "100%" }}
+                  
                 >
                   Log Out
                 </button>

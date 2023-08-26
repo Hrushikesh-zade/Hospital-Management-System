@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import employeeService from "../../services/employeeService";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Alert, Button, Collapse, Modal } from "react-bootstrap";
+import userService from "../../services/userService";
+import HeaderNavbar from "../General/HeaderNavbar";
 
 const InactiveEmployees = () => {
   const [employeeList, setEmployeeList] = useState([]);
@@ -9,8 +11,24 @@ const InactiveEmployees = () => {
   const [searchByFirstName, setSearchByFirstName] = useState("");
   const [searchByEmail, setSearchByEmail] = useState("");
   const [searchById, setSearchById] = useState("");
+  
+  const [admin, setAdmin] = useState({});
 
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    getEmployees();
+    userService
+      .getUserEmailById(id)
+      .then((resp) => {
+        setAdmin(resp.data);
+      })
+      .catch((error) => {
+        console.log("error");
+      });
+  }, []);
+
 
   useEffect(() => {
     getEmployees();
@@ -62,19 +80,26 @@ const InactiveEmployees = () => {
   return (
     <div>
       {/* start of  filter bar */}
+      <HeaderNavbar
+        firstName={admin.firstName}
+        lastName={admin.lastName}
+        sid={admin.userId}
+        role={admin.role}
+        emailId={admin.email}
+      ></HeaderNavbar>
 
       {/* 2 container */}
 
       <div className="container-fluid ">
-        <div className="p-3 mb-2 bg-light text-white">
+        <div className="mt-2 mb-2 bg-light text-white shadow-lg bg-body">
           <div
-            className="container-fluid text-center"
-            style={{ border: "2px solid red" }}
+            className="container-fluid text-center p-2"
+            style={{ backgroundColor: "#C4C4C4" }}
           >
             {/* <div id="filterdiv" */}
             <div
               className="d-grid gap-2 d-md-flex justify-content-md-end"
-              // style={{ border: "2px solid red" }}
+        
             >
               <button
                 className="btn btn-primary me-md-2"
@@ -104,23 +129,23 @@ const InactiveEmployees = () => {
           </div>
 
           <Collapse in={open}>
-            <div id="collapse-filter-menu">
-              <div className="text-dark">
+            <div id="collapse-filter-menu" style={{ backgroundColor: "#C4C4C4" }}>
+              <div className="text-dark mb-2">
                 <div className="container-fluid text-center">
                   <div className="row">
-                    <div className="col-2">Filter</div>
+                    <div className="col-2"></div>
                     <div className="col"></div>
                   </div>
                 </div>
                 <div className="row justify-content-end">
                   <div className="col-lg-3">
                     <div className="row">
-                      <div className="col-lg-12">Id</div>
-                      <div className="col-lg-12">
+                      {/* <div className="col-lg-12">Id</div> */}
+                      <div className="col-lg-12 mx-2 mb-2 mt-4">
                         <input
                           className="form-control me-2"
                           type="search"
-                          placeholder="Search ny id"
+                          placeholder="Search By Id"
                           aria-label="Search"
                           value={searchById}
                           onChange={(e) => setSearchById(e.target.value)}
@@ -130,12 +155,12 @@ const InactiveEmployees = () => {
                   </div>
                   <div className="col-lg-3">
                     <div className="row">
-                      <div className="col-lg-12">NAME</div>
-                      <div className="col-lg-12">
+                      {/* <div className="col-lg-12">NAME</div> */}
+                      <div className="col-lg-12 mx-2 mb-2 mt-4">
                         <input
                           className="form-control me-2"
                           type="search"
-                          placeholder="search by name"
+                          placeholder="Search By Name"
                           aria-label="Search"
                           value={searchByFirstName}
                           onChange={(e) => setSearchByFirstName(e.target.value)}
@@ -145,12 +170,12 @@ const InactiveEmployees = () => {
                   </div>
                   <div className="col-lg-3">
                     <div className="row">
-                      <div className="col-lg-12">Email</div>
-                      <div className="col-lg-12">
+                      {/* <div className="col-lg-12">Email</div> */}
+                      <div className="col-lg-12 mx-2 mb-2 mt-4">
                         <input
-                          className="form-control me-2"
+                          className="form-control me-2 w-80"
                           type="search"
-                          placeholder="Search by email"
+                          placeholder="Search By Email"
                           aria-label="Search"
                           value={searchByEmail}
                           onChange={(e) => setSearchByEmail(e.target.value)}
@@ -181,7 +206,7 @@ const InactiveEmployees = () => {
       {/* /************************************************ */}
 
       <div className="container-fluid ">
-        <table className="table table-secondary table-striped">
+        <table className="table table-secondary table-striped shadow-lg bg-body rounded">
           <thead>
             <tr>
               <th scope="col">EMPLOYEE Id</th>

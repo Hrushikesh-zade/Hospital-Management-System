@@ -10,6 +10,7 @@ const Login = () => {
   });
 
   const [token, setToken] = useState();
+  const [flag,setFlag] = useState(false);
 
   const navigate = useNavigate();
 
@@ -43,6 +44,16 @@ const Login = () => {
   }
 
   useEffect(() => {
+    if (flag === true) {
+      const timer = setTimeout(() => {
+        setFlag(false);
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [flag]);
+
+  useEffect(() => {
     if (localStorage.getItem("token") != null) {
       getUser(user);
     }
@@ -57,6 +68,7 @@ const Login = () => {
       })
       .catch((err) => {
         console.log("Error 1" + err);
+        setFlag(true);
       });
   }
 
@@ -106,7 +118,12 @@ const Login = () => {
                           onChange={(e) =>
                             handleChange("password", e.target.value)
                           }
-                          className="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                          className={
+                            flag
+                              ? "form-control rounded-pill border-0  px-4 text-primary custom-shade custom-shake"
+                              : "form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                          }
+                          // className="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
                         />
                       </div>
 
@@ -123,7 +140,7 @@ const Login = () => {
                         type="button"
                         className="btn btn-secondary btn-block text-uppercase mb-2 rounded-pill shadow-sm custom-button-side"
                         onClick={() => {
-                          navigate(-1);
+                          navigate("/");
                         }}
                       >
                         Back
