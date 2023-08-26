@@ -13,9 +13,9 @@ const AdminPage = () => {
   const [searchByFirstName, setSearchByFirstName] = useState("");
   const [searchByEmail, setSearchByEmail] = useState("");
   const [searchById, setSearchById] = useState("");
-  const [admin,setAdmin] = useState({});
+  const [admin, setAdmin] = useState({});
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     getEmployees();
@@ -138,25 +138,26 @@ const AdminPage = () => {
 
       {/*  */}
 
-      
-
       {/* start of  filter bar */}
 
       {/* 2 container */}
 
-      <HeaderNavbar firstName={admin.firstName} lastName={admin.lastName} sid={admin.userId} role={admin.role} emailId={admin.email} ></HeaderNavbar>
+      <HeaderNavbar
+        firstName={admin.firstName}
+        lastName={admin.lastName}
+        sid={admin.userId}
+        role={admin.role}
+        emailId={admin.email}
+      ></HeaderNavbar>
 
-      <div className="container-fluid ">
-        <div className="p-3 mb-2 bg-light text-white">
+      <div className="container-fluid" style={{marginTop:"4%"}}>
+        <div className="mt-2 mb-2 bg-light text-white shadow-lg bg-body ">
           <div
-            className="container-fluid text-center"
-            style={{ border: "2px solid red" }}
+            className="container-fluid text-center p-2"
+            style={{ backgroundColor: "#C4C4C4" }}
           >
             {/* <div id="filterdiv" */}
-            <div
-              className="d-grid gap-2 d-md-flex justify-content-md-end"
-              // style={{ border: "2px solid red" }}
-            >
+            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
               <button
                 className="btn btn-primary me-md-2"
                 type="button"
@@ -183,23 +184,26 @@ const AdminPage = () => {
           </div>
 
           <Collapse in={open}>
-            <div id="collapse-filter-menu">
-              <div className="text-dark">
+            <div
+              id="collapse-filter-menu"
+              style={{ backgroundColor: "#C4C4C4" }}
+            >
+              <div className="text-dark mb-2">
                 <div className="container-fluid text-center">
                   <div className="row">
-                    <div className="col-2">Filter</div>
+                    <div className="col-2"></div>
                     <div className="col"></div>
                   </div>
                 </div>
                 <div className="row justify-content-end">
                   <div className="col-lg-3">
                     <div className="row">
-                      <div className="col-lg-12">Id</div>
-                      <div className="col-lg-12">
+                      {/* <div className="col-lg-12 mx-2 mt-1">Id</div> */}
+                      <div className="col-lg-12 mx-2 mb-2 mt-4">
                         <input
-                          className="form-control me-2"
+                          className="form-control me-2 "
                           type="search"
-                          placeholder="Search ny id"
+                          placeholder="Search By Id"
                           aria-label="Search"
                           value={searchById}
                           onChange={(e) => setSearchById(e.target.value)}
@@ -209,12 +213,14 @@ const AdminPage = () => {
                   </div>
                   <div className="col-lg-3">
                     <div className="row">
-                      <div className="col-lg-12">NAME</div>
-                      <div className="col-lg-12">
+                      {/* <div className="col-lg-12 mx-2 mt-1 ">
+                        Name
+                        </div> */}
+                      <div className="col-lg-12 mx-2 mb-2 mt-4">
                         <input
                           className="form-control me-2"
                           type="search"
-                          placeholder="search by name"
+                          placeholder="Search By Name"
                           aria-label="Search"
                           value={searchByFirstName}
                           onChange={(e) => setSearchByFirstName(e.target.value)}
@@ -224,16 +230,16 @@ const AdminPage = () => {
                   </div>
                   <div className="col-lg-3">
                     <div className="row">
-                      <div className="col-lg-12">Email</div>
-                      <div className="col-lg-12">
+                      {/* <div className="col-lg-12 mx-2 mt-1">Email</div> */}
+                      <div className="col-lg-12 mx-2 mb-2 mt-4">
                         <input
-                          className="form-control me-2"
+                          className="form-control me-2 w-80"
                           type="search"
-                          placeholder="Search by email"
+                          placeholder="Search By Email"
                           aria-label="Search"
                           value={searchByEmail}
                           onChange={(e) => setSearchByEmail(e.target.value)}
-                          />
+                        />
                       </div>
                     </div>
                   </div>
@@ -260,10 +266,10 @@ const AdminPage = () => {
       {/* /************************************************ */}
 
       <div className="container-fluid ">
-        <table className="table table-secondary table-striped">
+        <table className="table table-secondary table-striped shadow-lg bg-body rounded">
           <thead>
             <tr>
-              <th scope="col">EMPLOYEE Id</th>
+              <th scope="col">EMPLOYEE ID</th>
               <th scope="col">FIRST NAME</th>
               <th scope="col">LAST NAME</th>
               <th scope="col">EMAIL</th>
@@ -275,7 +281,7 @@ const AdminPage = () => {
           </thead>
           <tbody>
             {employeeList
-              .filter((cf)=>{
+              .filter((cf) => {
                 if (
                   (searchByFirstName === "" ||
                     searchByFirstName.trim() === "") &&
@@ -283,23 +289,19 @@ const AdminPage = () => {
                   (searchByEmail === "" || searchByEmail.trim() === "")
                 ) {
                   return cf;
-                }
-                 else if (
-                    (cf.firstName
-                        .toLowerCase()
-                        .includes(searchByFirstName.toLowerCase()) ||
-                        cf.lastName
-                          .toLowerCase()
-                          .includes(searchByFirstName.toLowerCase()))
-                           &&
-                  cf.empId.toString().includes(searchById.toLowerCase())
-                   &&
+                } else if (
+                  (cf.firstName
+                    .toLowerCase()
+                    .includes(searchByFirstName.toLowerCase()) ||
+                    cf.lastName
+                      .toLowerCase()
+                      .includes(searchByFirstName.toLowerCase())) &&
+                  cf.empId.toString().includes(searchById.toLowerCase()) &&
                   cf.email.toLowerCase().includes(searchByEmail.toLowerCase())
                 ) {
                   return cf;
-                }
-                else{
-                    return false;
+                } else {
+                  return false;
                 }
               })
 

@@ -72,21 +72,17 @@ function PatientList() {
   }
 
   return (
-    <div className="p-3 mb-2 bg-secondary">
-      <div className="container-fluid">
-
+    <div >
       <HeaderNavbar firstName={accountant.firstName} lastName={accountant.lastName} sid={accountant.userId} role={accountant.role} emailId={accountant.email} ></HeaderNavbar>
       
-      </div>
-      
 
-      <div className="container-fluid ">
-        <div className="p-3 mb-2 bg-light text-white">
+      <div className="container-fluid  "style={{marginTop:"4%"}}>
+        <div className="mt-2 mb-2 bg-light text-white shadow-lg bg-body rounded ">
           <div
-            className="container-fluid text-center"
-             style={{ border: "2px solid red" }}
-          >
-            
+            className="container-fluid text-center p-2"
+            style={{ backgroundColor:"#C4C4C4" }}
+             
+          >         
               {/* <div id="filterdiv" */}
               <div
                 className="d-grid gap-2 d-md-flex justify-content-md-end"
@@ -113,15 +109,15 @@ function PatientList() {
           </div>
 
           <Collapse in={open}>
-            <div id="collapse-filter-menu">
-              <div className="text-dark">
+            <div id="collapse-filter-menu" style={{ backgroundColor:"#C4C4C4" }}>
+              <div className="text-dark mb-2" >
                 <div className="container-fluid text-center">
                   <div className="row">
                     <div
                       className="col-2"
                       
                     >
-                      Filter
+                      
                     </div>
                     <div className="col"></div>
                   </div>
@@ -129,12 +125,12 @@ function PatientList() {
                 <div className="row justify-content-end">
                   <div className="col-lg-3">
                     <div className="row">
-                      <div className="col-lg-12">Id</div>
-                      <div className="col-lg-12">
+                      {/* <div className="col-lg-12 mt-1 mx-2">Id</div> */}
+                      <div className="col-lg-12 mx-2 mb-2 mt-4">
                         <input
                           className="form-control me-2"
                           type="search"
-                          placeholder="Search ny id"
+                          placeholder="Search By Id"
                           aria-label="Search"
                           value={searchById}
                           onChange={(e) => setSearchById(e.target.value)}
@@ -144,12 +140,12 @@ function PatientList() {
                   </div>
                   <div className="col-lg-3">
                     <div className="row">
-                      <div className="col-lg-12">NAME</div>
-                      <div className="col-lg-12">
+                      {/* <div className="col-lg-12 mx-2 mt-1">Name</div> */}
+                      <div className="col-lg-12 mx-2 mb-2 mt-4">
                         <input
                           className="form-control me-2"
                           type="search"
-                          placeholder="search by name"
+                          placeholder="Search By Name"
                           aria-label="Search"
                           value={searchByFirstName}
                           onChange={(e) => setSearchByFirstName(e.target.value)}
@@ -159,12 +155,12 @@ function PatientList() {
                   </div>
                   <div className="col-lg-3">
                     <div className="row">
-                      <div className="col-lg-12">Email</div>
-                      <div className="col-lg-12">
+                      {/* <div className="col-lg-12 mx-2 mt-1">Email</div> */}
+                      <div className="col-lg-12 mx-2 mb-2 mt-4">
                         <input
                           className="form-control me-2"
                           type="search"
-                          placeholder="Search by email"
+                          placeholder="Search By Email"
                           aria-label="Search"
                           value={searchByEmail}
                           onChange={(e) => setSearchByEmail(e.target.value)}
@@ -197,7 +193,7 @@ function PatientList() {
       {/* start of tables */}
 
       <div className="container-fluid ">
-        <table className="table table-secondary table-striped">
+        <table className="table table-secondary table-striped shadow-lg bg-body rounded">
           <thead>
             <tr>
               <th scope="col">Id</th>

@@ -170,6 +170,7 @@ Back to List
                     value={employeeDetails.email}
                     onChange={(e) => handleChange("email", e.target.value)}
                     readOnly
+                    
                   />
                 </div>
 
