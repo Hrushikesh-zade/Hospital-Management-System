@@ -32,12 +32,7 @@ function PatientLoginDetails() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   setPass(prevPass => ({
-  //     ...prevPass,
-  //     email: patientUser.emailId
-  //   }));
-  // }, [patientUser.emailId]);
+  
 
   const changePassword = () => {
     userService.getUserByEmail(pass).then((resp)=>{
