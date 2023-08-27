@@ -129,6 +129,7 @@ const Login = () => {
 
                       <button
                         type="button"
+                        id="loginpage_login"
                         className="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm custom-button-side"
                         onClick={() => {
                           getTokenAndStore(user);

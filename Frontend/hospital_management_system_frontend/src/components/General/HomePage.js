@@ -31,7 +31,7 @@ function HomePage() {
           <Nav>
             
             <Nav.Link eventKey={2} href="/login">
-            <Button variant="outline-primary" style={{width:"100px"}}>Login</Button>
+            <Button id="home_page_login" variant="outline-primary" style={{width:"100px"}}>Login</Button>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

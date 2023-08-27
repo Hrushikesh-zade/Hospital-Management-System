@@ -172,13 +172,13 @@ const AdminPage = () => {
                 <i className="bi bi-funnel"></i>
                 Filter it
               </button>
-              <Link to="/admin/add" className="btn btn-primary">
+              <Link id="adminpage_add_employee" to="/admin/add" className="btn btn-primary">
                 Add Employee
               </Link>
-              <Link to="/admin/addDoctor" className="btn btn-primary">
+              <Link  id="adminpage_add_doctor" to="/admin/addDoctor" className="btn btn-primary">
                 Add Doctor
               </Link>
-              <Link to={`/admin/${id}/inactiveEmployees`} className="btn btn-primary">
+              <Link id="adminpage_add_inactive_employee" to={`/admin/${id}/inactiveEmployees`} className="btn btn-primary">
                 Inactive Employees
               </Link>
             </div>
