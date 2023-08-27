@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {  useParams, useNavigate } from "react-router-dom";
 import userService from "../../services/userService";
-import profilePic from "../../images/user_icon.png";
-// import userService from "../../services/userService";
+import female_admin from "../../images/avtars/user_female.jpg";
+import male_admin from "../../images/avtars/admin_man.jpg";
 import "../../css/customProfile.css";
 import { Badge } from "react-bootstrap";
-//import "../../css/customLogin.css";
+
 
 const AdminProfile = () => {
   const [profile, setProfile] = useState({});
@@ -64,13 +64,18 @@ const AdminProfile = () => {
               </h4>
             </div>
             <div className="profileDivC2 col-xs-6 col-lg-6">
-              <img src={profilePic} className="profilePic" alt="avtar" />
+              {/* <img src={profilePic} className="profilePic" alt="avtar" /> */}
+              {profile.gender==="MALE"?
+              <img src={male_admin} className="profilePic" alt="avtar" />:
+              <img src={female_admin} className="profilePic" alt="avtar" />
+            }
             </div>
             <div className="profileDivC3 col-xs-3 col-lg-3">
               {/* <button className=" btn btn-success">
                 {profile.status}
               </button> */}
               <h4>
+                
               <Badge pill bg={profile.status==="ACTIVE"?"success":"danger"} text="white">
               {profile.status}
               </Badge>

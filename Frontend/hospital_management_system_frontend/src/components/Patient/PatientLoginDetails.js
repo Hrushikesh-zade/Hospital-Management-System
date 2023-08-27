@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import avtar from "../../images/UserAvtar.png";
 import profilePic from "../../images/user_icon.png";
+import patient_male from "../../images/avtars/user_man.jpg";
+import patient_female from "../../images/avtars/user_female2.jpg";
 import "../../css/customProfile.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import patientUserService from "../../services/patientUserService";
@@ -142,7 +144,10 @@ function PatientLoginDetails() {
               </h4>
             </div>
             <div className="profileDivC2 col-xs-6 col-lg-6">
-              <img src={profilePic} className="profilePic" alt="avtar" />
+            {patientUser.gender==="MALE"?
+              <img src={patient_male} className="profilePic" alt="avtar" />:
+              <img src={patient_female} className="profilePic" alt="avtar" />
+            }
             </div>
             <div className="profileDivC3 col-xs-3 col-lg-3">
             <h4>

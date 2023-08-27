@@ -1,22 +1,14 @@
-
-
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import userService from "../../services/userService";
-// import userService from "../../services/userService";
-
-import profilePic from "../../images/user_icon.png"
+import recep_man from "../../images/avtars/recep_male.jpg"
+import recep_female from "../../images/avtars/recep_female.jpg"
 import "../../css/customProfile.css";
 
 
 const ReceptionistProfile = () => {
   const [profile, setProfile] = useState({});
-  // const [pass, setPass] = useState(
-  //   {
-  //       email: "",
-  //       password: ""
-  //   }
-  // )
+  
     
 
   const navigate = useNavigate();
@@ -64,7 +56,11 @@ const ReceptionistProfile = () => {
               </button>
             </div>
             <div className="profileDivC2 col-xs-6 col-lg-6">
-              <img src={profilePic} className="profilePic" alt="avtar" />
+            {profile.gender==="MALE"?
+            <img src={recep_man} className="profilePic" alt="avtar" />:
+            <img src={recep_female} className="profilePic" alt="avtar" />
+            
+          }
             </div>
             <div className="profileDivC3 col-xs-3 col-lg-3">
               <button className=" btn btn-success">

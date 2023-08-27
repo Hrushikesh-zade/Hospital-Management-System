@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import doctorService from "../../services/doctorService";
-import profilePic from "../../images/user_icon.png";
+import doc_male from "../../images/avtars/img_doc_01.jpg";
+import doc_female from "../../images/avtars/female_doc1.jpg";
 // import profilePic from "../../images/adminDark.jpg"
 // import profilePic from "../../images/accountantLight.jpg"
 // import profilePic from "../../images/maleDoc.jpg"
@@ -44,7 +45,12 @@ const DoctorProfile = () => {
               </h4>
             </div>
             <div className=" col-xs-6 col-lg-6">
-              <img src={profilePic} className="profilePic" alt="avtar" />
+              {
+                profile.gender==="MALE"?
+                <img src={doc_male} className="profilePic" alt="avtar" />:
+                <img src={doc_female} className="profilePic" alt="avtar" />
+              }
+
             </div>
             <div className=" col-xs-3 col-lg-3">
               {/* <button className=" btn btn-success"></button> */}
