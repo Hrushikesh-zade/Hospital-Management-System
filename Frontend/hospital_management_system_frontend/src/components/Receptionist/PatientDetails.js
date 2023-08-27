@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import patientService from "../../services/patient.service";
 import { Badge } from "react-bootstrap";
-import profilePic from "../../images/UserAvtar.png";
+import pat_male from "../../images/avtars/user_man.jpg";
+import pat_female from "../../images/avtars/user_female2.jpg";
 
 
 const PatientDetails = () => {
@@ -122,11 +123,15 @@ const PatientDetails = () => {
                 <h4>
                   <Badge pill bg="warning" text="dark">
                     {patientDetails.role}
+                    
                   </Badge>
                 </h4>
               </div>
               <div className=" col-xs-6 col-lg-6">
-                <img src={profilePic} className="profilePic" alt="avtar" />
+                {patientDetails.gender==="MALE"?
+                <img src={pat_male} className="profilePic" alt="avtar" />:
+                <img src={pat_female} className="profilePic" alt="avtar" />
+              }
               </div>
               <div className=" col-xs-3 col-lg-3">
                 {/* <button className=" btn btn-success"></button> */}
