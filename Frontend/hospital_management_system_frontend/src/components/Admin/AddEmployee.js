@@ -198,7 +198,6 @@ const [employeeDetails,setEmployeeDetails] = useState({
                 <div className="form-group col-md-6 mt-2">
                   <button
                     type="submit"
-                    id="admin-addEmployee-submitButton-box"
                     className="btn btn-primary custom-button custom-spacing custom-spacing-button"
                     onClick={saveTheEmployee}
                   >
@@ -208,7 +207,6 @@ const [employeeDetails,setEmployeeDetails] = useState({
 
                 <div className="form-group col-md-6 mt-2">
                   <button
-                    id="admin-addEmployee-backButton-box"
                     className="btn btn-secondary  custom-spacing custom-spacing-button"
                     onClick={() => {
                       navigate(-1);

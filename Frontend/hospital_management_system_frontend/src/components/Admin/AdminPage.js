@@ -91,7 +91,19 @@ const AdminPage = () => {
 
   return (
     <div>
-      
+      <>
+        {showAlert && (
+          <Alert
+            variant="danger"
+            onClose={() => setShowAlert(false)}
+            dismissible
+            className="fade m-2"
+          >
+            Patient <span>{employee.firstName}</span>{" "}
+            <span>{employee.lastName}</span> deleted succefully
+          </Alert>
+        )}
+      </>
 
       {/*  */}
 
@@ -138,20 +150,6 @@ const AdminPage = () => {
         emailId={admin.email}
         
       ></HeaderNavbar>
-
-      <>
-        {showAlert && (
-          <Alert
-            variant="danger"
-            onClose={() => setShowAlert(false)}
-            dismissible
-            className="fade m-2"
-          >
-            Patient <span>{employee.firstName}</span>{" "}
-            <span>{employee.lastName}</span> deleted succefully
-          </Alert>
-        )}
-      </>
 
       <div className="container-fluid" >
         <div className="mt-2 mb-2 bg-light text-white shadow-lg bg-body ">

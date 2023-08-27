@@ -84,11 +84,11 @@ const DoctorPage = () => {
           >
             {/* <div id="filterdiv" */}
             <div
-              className="d-grid gap-2 d-md-flex justify-content-md-end"
+              className="d-grid gap-2 d-md-flex justify-content-md-end me-md-3"
               // style={{ border: "2px solid red" }}
             >
               <button
-                className="btn btn-primary me-md-2"
+                className="btn btn-primary me-md-5 "
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseExample"

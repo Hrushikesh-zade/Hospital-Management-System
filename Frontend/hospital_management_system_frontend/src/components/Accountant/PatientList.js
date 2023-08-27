@@ -85,11 +85,11 @@ function PatientList() {
           >         
               {/* <div id="filterdiv" */}
               <div
-                className="d-grid gap-2 d-md-flex justify-content-md-end"
+                className="d-grid gap-2 d-md-flex justify-content-md-end me-md-5"
                 // style={{ border: "2px solid red" }}
               >
                 <button
-                  className="btn btn-primary me-md-2"
+                  className="btn btn-primary me-md-5 me-xs-2"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseExample"
@@ -246,7 +246,7 @@ function PatientList() {
 
                   <td>
                     <Link
-                      to={`/accountant/invoice/${patient.patientId}`}
+                      to={`/accountant/${id}/invoice/${patient.patientId}`}
                       className="btn btn-info mb-2"
                     >
                       <i className="bi bi-info-circle-fill"></i>

@@ -60,76 +60,7 @@ const EditEmployee = () => {
 
     return (
         <div>
-      {/* <label>Enter firstname</label>
-      <input
-        value={employeeDetails.firstName}
-        onChange={(e) => handleChange("firstName", e.target.value)}
-      />
-      <br />
-      <label>Enter lastname</label>
-      <input
-        value={employeeDetails.lastName}
-        onChange={(e) => handleChange("lastName", e.target.value)}
-      />
-      <br />
-      <label>Enter email</label>
-      <input
-        value={employeeDetails.email}
-        onChange={(e) => handleChange("email", e.target.value)}
-      />
-      <br />
-      <label>Enter Gender</label>
-      <input
-        value={employeeDetails.gender}
-        onChange={(e) => handleChange("gender", e.target.value)}
-      />
-      <br />
-      <label>Enter phone_no</label>
-      <input
-        value={employeeDetails.contactNo}
-        onChange={(e) => handleChange("contactNo", e.target.value)}
-      />
-      <br />
-      <label>Enter Role</label>
-      <input
-        value={employeeDetails.role}
-        onChange={(e) => handleChange("role", e.target.value)}
-      />
-      <br />
-      <label>Enter DOB</label>
-      <input
-        type="date"
-        value={employeeDetails.dob}
-        onChange={(e) => handleChange("dob", e.target.value)}
-      />
-      <br />
-      <label>Enter Date_Of_Hiring</label>
-      <input
-        type="date"
-        value={employeeDetails.hiringDate}
-        onChange={(e) => handleChange("hiringDate", e.target.value)}
-      />
-      <br />
-      <label>Enter Salary</label>
-      <input
-        value={employeeDetails.salary}
-        onChange={(e) => handleChange("salary", e.target.value)}
-      />
-      <br />
-      <button className="btn btn-primary" onClick={saveTheEmployee}>
-        {" "}
-        submit details
-      </button> */}
-
-      {/* <Link to="/admin" className="btn btn-secondary">
-        Back to List
-      </Link> */}
-      {/* <button className="btn btn-secondary" onClick={()=>{
-        navigate(-1);
-      }}>
-Back to List
-      </button> */}
-
+      
 <div className="container mt-3 shadow-lg p-3 mb-5 bg-body rounded" >
         <div className="row justify-content-center" >
           <div className="col-md-6" style={{width:"100%"}}>

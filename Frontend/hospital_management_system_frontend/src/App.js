@@ -60,7 +60,7 @@ function App() {
 
           {/* accountant page routes */}
           <Route exact path="/accountant/:id" element={<Protected Component={PatientList} Role1="ACCOUNTANT"/>} />
-          <Route path="/accountant/invoice/:id" element={<Protected Component={Invoice} Role1="ACCOUNTANT"/>} />
+          <Route path="/accountant/:aid/invoice/:id" element={<Protected Component={Invoice} Role1="ACCOUNTANT"/>} />
           <Route path="/accountant/profile/:id" element={<Protected Component={AccountantProfile} Role1="ACCOUNTANT"/>} />
 
           {/* doctor page routes */}

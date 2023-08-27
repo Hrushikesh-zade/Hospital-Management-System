@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import doctorService from "../../services/doctorService";
 import profilePic from "../../images/user_icon.png";
 // import profilePic from "../../images/adminDark.jpg"
 // import profilePic from "../../images/accountantLight.jpg"
 // import profilePic from "../../images/maleDoc.jpg"
 import "../../css/customProfile.css";
+import { Badge } from "react-bootstrap";
 
 const DoctorProfile = () => {
   const [profile, setProfile] = useState({});
+
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -28,27 +31,28 @@ const DoctorProfile = () => {
     <div>
       <div className="mainDiv">
         {/* Card----------------------- */}
-        <div className="cardHolder" style={{width:"65%"}}>
+        <div className="cardHolder" style={{ width: "65%" }}>
           {/* Profile section ----------------- */}
-          <div
-            className="card-containerDiv-Profile shadow row"
-            
-          >
+          <div className="card-containerDiv-Profile shadow row">
             {/* profile 3 columns ------------- */}
-            <div className="profileDivC1 col-xs-3 col-lg-3">
-              <button className=" btn btn-primary">
-                
-                 {profile.role}{" "}
-              </button>
+            <div className=" col-xs-3 col-lg-3">
+              {/* <button className=" btn btn-primary"> </button> */}
+              <h4>
+              <Badge pill bg="warning" text="dark">
+              {profile.role}
+              </Badge>
+              </h4>
             </div>
-            <div className="profileDivC2 col-xs-6 col-lg-6">
+            <div className=" col-xs-6 col-lg-6">
               <img src={profilePic} className="profilePic" alt="avtar" />
             </div>
-            <div className="profileDivC3 col-xs-3 col-lg-3">
-              <button className=" btn btn-success">
-                {profile.status}
-              </button>
-              
+            <div className=" col-xs-3 col-lg-3">
+              {/* <button className=" btn btn-success"></button> */}
+              <h4>
+              <Badge pill bg={profile.status==="ACTIVE"?"success":"danger"} text="white">
+              {profile.status}
+              </Badge>
+              </h4>
             </div>
             <div className="container">
               <h3 className="cardProfileName">
@@ -67,99 +71,74 @@ const DoctorProfile = () => {
             <div className="listDivContainer row">
               {/* left list container -------- */}
               <div className="listDivLeft container  col-md-6 col-xs-12">
-
-
-              <div className="row my-3" style={{width: "450px" }}>
-                  <div className="mt-2 col-4 custom-bold-color" >
-                    Email :
-                  </div>
+                <div className="row my-3" style={{ width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color">Email :</div>
                   <div
                     id="inputShowEmail-profile"
                     className=" rounded-pill border-1 shadow-sm text-dark col-8 "
-                    
                   >
                     {profile.email}
                   </div>
                 </div>
 
-                <div className="row my-3" style={{width: "450px" }}>
-                  <div className="mt-2 col-4 custom-bold-color" >
+                <div className="row my-3" style={{ width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color">
                     Contact No :
                   </div>
                   <div
                     id="contact-no-tag"
-                    
                     className=" rounded-pill border-1 shadow-sm text-dark col-8 "
-                    
                   >
                     {profile.contactNo}
                   </div>
                 </div>
 
-                <div className="row my-3" style={{width: "450px" }}>
-                  <div className="mt-2 col-4 custom-bold-color" >
+                <div className="row my-3" style={{ width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color">
                     Date Of Birth :
                   </div>
                   <div
                     id="inputPassword"
-                    
                     className=" rounded-pill border-1 shadow-sm text-dark col-8 "
-                    
                   >
                     {profile.dob}
                   </div>
                 </div>
-                
-                
-                <div className="row my-3" style={{width: "450px" }}>
-                  <div className="mt-2 col-4 custom-bold-color" >
-                    Salary :
-                  </div>
+
+                <div className="row my-3" style={{ width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color">Salary :</div>
                   <div
                     id="inputPassword"
-                    
                     className=" rounded-pill border-1 shadow-sm text-dark col-8 "
-                    
                   >
                     {profile.salary}
                   </div>
                 </div>
-
-
               </div>
               {/* left list container -------- */}
               <div className="listDivRight container col-md-6 col-xs-12">
-
-              <div className="row my-3 " style={{width: "450px" }}>
-                  <div className="mt-2 col-4 custom-bold-color" >
-                     Doctor Id:
-                  </div>
+                <div className="row my-3 " style={{ width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color">Doctor Id:</div>
                   <div
                     id="inputPassword"
                     className=" rounded-pill border-1 shadow-sm text-dark col-8 "
-                    
                   >
                     {profile.doctorId}
                   </div>
                 </div>
 
-                <div className="row my-3" style={{width: "450px" }}>
-                  <div className="mt-2 col-4 custom-bold-color" >
-                    Gender :
-                  </div>
+                <div className="row my-3" style={{ width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color">Gender :</div>
                   <div
                     id="inputPassword"
-                    
                     className=" rounded-pill border-1 shadow-sm text-dark col-8 "
-                    
                   >
                     {profile.gender}
                   </div>
                 </div>
-                
 
-                <div className="row my-3" style={{width: "450px" }}>
-                  <div className="mt-2 col-4 custom-bold-color" >
+                <div className="row my-3" style={{ width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color">
                     HiringDate :
                   </div>
                   <div
@@ -167,29 +146,32 @@ const DoctorProfile = () => {
                     type="password"
                     required=""
                     className=" rounded-pill border-1 shadow-sm text-dark col-8 "
-                    
                   >
                     {profile.hiringDate}
                   </div>
                 </div>
 
-
-                <div className="row my-3" style={{width: "450px" }}>
-                  <div className="mt-2 col-4 custom-bold-color" >
-                    Charges :
-                  </div>
+                <div className="row my-3" style={{ width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color">Charges :</div>
                   <div
                     id="inputPassword"
-                    
                     className=" rounded-pill border-1 shadow-sm text-dark col-8 "
-                    
                   >
                     {profile.charges}
                   </div>
                 </div>
-                
-        
               </div>
+            <div className="form-group col-md-6 mt-2">
+                      <button
+                        id="admin-addDoctor-backButton-box"
+                        className="btn btn-secondary  custom-spacing custom-spacing-button"
+                        onClick={() => {
+                          navigate(-1);
+                        }}
+                      >
+                        Go Back
+                      </button>
+                    </div>
             </div>
             {/* <div className="skills">
                             <ul >
@@ -223,6 +205,11 @@ const DoctorProfile = () => {
                         </div> */}
           </div>
         </div>
+
+
+
+
+
       </div>
     </div>
   );

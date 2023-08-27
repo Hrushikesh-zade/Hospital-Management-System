@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import avtar from "../../images/UserAvtar.png";
+import profilePic from "../../images/user_icon.png";
+import "../../css/customProfile.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import patientUserService from "../../services/patientUserService";
+import patientService from "../../services/patient.service";
 import "../../css/profile.css";
-import { Container, NavDropdown, Navbar } from "react-bootstrap";
+import { Badge, Container, NavDropdown, Navbar } from "react-bootstrap";
 import userService from "../../services/userService";
 function PatientLoginDetails() {
   
   const [patientUser, setPatientUser] = useState([]);
+  const [doctorsAllocated, setDoctorsAllocated] = useState([]);
   const [pass, setPass] = useState(
     {
         email: "",
@@ -20,9 +24,26 @@ function PatientLoginDetails() {
   const { id } = useParams();
 
   useEffect(() => {
-    patientUserService
+    // patientUserService
+    //   .get(id)
+    //   .then((resp) => { 
+    //     console.log(resp.data);
+    //     setPatientUser(resp.data);
+    //     setPass({...pass,email:resp.data.email});
+
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    getPatientDetail(id);
+    getDoctorsList(id);
+  }, []);
+
+  function getPatientDetail(patientId) {
+    patientService
       .get(id)
       .then((resp) => { 
+        console.log(resp.data);
         setPatientUser(resp.data);
         setPass({...pass,email:resp.data.email});
 
@@ -30,7 +51,19 @@ function PatientLoginDetails() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }
+
+  function getDoctorsList(patientId) {
+    patientService
+      .getAllocatedDoctors(patientId)
+      .then((resp) => {
+        console.log(resp.data);
+        setDoctorsAllocated(resp.data);
+      })
+      .catch((err) => {
+        console.log("some error ocurred in patient details");
+      });
+  }
 
   // useEffect(() => {
   //   setPass(prevPass => ({
@@ -88,132 +121,308 @@ function PatientLoginDetails() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    <div className="container">
-      <div className="row">
-        <div className="col">
-          {/* <!-- user card starts --> */}
-          <div className="card user-card">
-            {/* <!-- card header - contains payment status & close button --> */}
-            <div className="card-header">
-              <div className="container">
-                <div className="d-flex justify-content-between">
-                  {/* <!-- payment status --> */}
-                  {/* <h5>{patientUser.payStatus}</h5> */}
-                  {/* <!-- close button --> */}
-                  {/* <button className="btn-close"></button> */}
-                </div>
-              </div>
-            </div>
-            {/* <!-- card header ends --> */}
-            {/* <!-- card block starts --> */}
-            <div className="card-block text-center">
-              <div className="user-image ">
-                {/* <!-- <img src="https://bootdey.com/img/Content/avatar/avatar7.png" className="img-radius" alt="User-Profile-Image"> --> */}
-                {/* <img src="../images/UserAvtar.png" alt="User-Profile-Image" className="rounded-circle border border-4"/> */}
-                <img
-                  src={avtar}
-                  alt="avtar"
-                  className="rounded-circle border border-4"
-                />
-              </div>
-              <div className="position-absolute top-0 start-100 translate-middle"></div>
-              <h6 className="f-w-600 m-t-25 m-b-10"><span>{patientUser.firstName}</span><span className="ms-2">{patientUser.lastName}</span></h6>
-              <p className="text-muted">
-                gender : Male(hardcoded) | bloodGrp : {patientUser.bloodGrp} |
-                DOB: {patientUser.DOB}
-              </p>
-              <hr />
-              <p className="text-muted m-t-15">paymentStatus : {patientUser.payStatus}</p>
+  
 
-              <div className="box">
-                <div className="row">
-                  <div className="col-4">
-                    <p>pid</p>
-                  </div>
-                  <div className="col-4">
-                    <p>userId</p>
-                  </div>
-                  <div className="col-4">
-                    <p>WardId + Bed</p>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-4">
-                    <p>{patientUser.id}</p>
-                  </div>
-                  <div className="col-4">
-                    <p>{patientUser.id}</p>
-                  </div>
-                  <div className="col-4">
-                    <p>
-                      {patientUser.ward_id}+{patientUser.Bed_Alloted}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <!-- card block ends --> */}
-            <div className=" card-body" >
-              <div className="row position-relative">
-                <div>
-                  <h4 className="position-absolute top-20 start-10">
-                    General Details:
-                  </h4>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-lg-6 col-xs-12">
-                  <div className="box">
-                    <span>email: {patientUser.email}</span>
-                  </div>
-                </div>
-                <div className="col-lg-6 col-xs-12">
-                  <div className="box">
-                    <span>mobile: {patientUser.phone_no}</span>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col">
-                  <div className="box">
-                    <span>
-                      date of admission :{patientUser.Date_Of_Admission}
-                    </span>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="box">
-                    <span>doctor allocated :{patientUser.Doct_Alloted}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div className="card-body">
-              <h4>Patient Problem :</h4>
-              <div className="box">
-              {patientUser.symptoms?.map((i)=>(
-                <p>{i}</p>
-              ))}
-              </div>
-            </div>
 
-            <div className="card-body">
-              <h4>Prescription :</h4>
-              <div className="box">
-              {/* {patientUser.prescription?.map((item)=>(
-                <p>{item}</p>
-              ))} */}
-              {patientUser.prescription}
-                
-              </div>
+    <div className="mainDiv">
+        {/* Card----------------------- */}
+        <div className="cardHolder my-5" style={{width:"65%"}}>
+          {/* Profile section ----------------- */}
+          <div
+            className="card-containerDiv-Profile shadow row"
+            
+          >
+            {/* profile 3 columns ------------- */}
+            <div className="profileDivC1 col-xs-3 col-lg-3">
+            <h4>
+              <Badge pill bg="warning" text="dark">
+              {patientUser.role}
+              </Badge>
+              </h4>
+            </div>
+            <div className="profileDivC2 col-xs-6 col-lg-6">
+              <img src={profilePic} className="profilePic" alt="avtar" />
+            </div>
+            <div className="profileDivC3 col-xs-3 col-lg-3">
+            <h4>
+              <Badge pill bg={patientUser.status==="ACTIVE"?"success":"danger"} text="white">
+              {patientUser.status}
+              </Badge>
+              </h4>
+              
+            </div>
+            <div className="container">
+              <h3 className="cardProfileName">
+                {patientUser.firstName} {patientUser.lastName}
+              </h3>
             </div>
           </div>
+
+          <div className="card-containerDiv shadow row">
+            {/* <h3 className="cardProfileName">
+              {profile.firstName} {profile.lastName}
+            </h3> */}
+            {/* <h3 className="status">status:{profile.status}</h3> */}
+
+            {/* listDivContainer--------------- */}
+            <div className="listDivContainer row">
+              {/* left list container -------- */}
+              <div className="listDivLeft container  col-md-6 col-xs-12">
+
+
+              <div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                    Email :
+                  </div>
+                  <div
+                    id="inputShowEmail-profile"
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {patientUser.email}
+                  </div>
+                </div>
+
+                <div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                    Contact No :
+                  </div>
+                  <div
+                    id="contact-no-tag"
+                    
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {patientUser.contactNo}
+                  </div>
+                </div>
+
+                <div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                    Date Of Birth :
+                  </div>
+                  <div
+                    id="inputPassword"
+                    
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {patientUser.dob}
+                  </div>
+                </div>
+                
+                
+                <div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                    Disease :
+                  </div>
+                  <div
+                    id="inputPassword"
+                    
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {patientUser.disease}
+                  </div>
+                </div>
+                <div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                    BloodGroup :
+                  </div>
+                  <div
+                    id="inputPassword"
+                    
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {patientUser.bloodGroup}
+                  </div>
+                </div>
+
+
+                <div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                    Prescription :
+                  </div>
+                  <div
+                    id="inputPassword"
+                    
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {patientUser.prescription}
+                  </div>
+                </div>
+                
+
+
+              </div>
+              {/* right list container -------- */}
+              <div className="listDivRight container col-md-6 col-xs-12">
+
+              <div className="row my-3 " style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                     Patient Id:
+                  </div>
+                  <div
+                    id="inputPassword"
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {patientUser.patientId}
+                  </div>
+                </div>
+
+                <div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                    Gender :
+                  </div>
+                  <div
+                    id="inputPassword"
+                    
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {patientUser.gender}
+                  </div>
+                </div>
+                
+
+                <div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                  RegisterDate :
+                  </div>
+                  <div
+                    id="inputPassword"
+                    type="password"
+                    required=""
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {patientUser.dateOfAdmission}
+                  </div>
+                </div>
+
+
+                
+                <div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                    PayStatus :
+                  </div>
+                  <div
+                    id="inputPassword"
+                    
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {patientUser.paymentStatus}
+                  </div>
+                </div>
+                
+                <div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                    Ward ID :
+                  </div>
+                  <div
+                    id="inputPassword"
+                    
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {patientUser.wardId}
+                  </div>
+                </div>
+
+                <div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                    AllocatedDrs. :
+                  </div>
+                  
+                  {/* <div
+                    id="inputPassword"
+                    
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {doctorsAllocated.map((i)=>i.firstName)}
+                  </div> */}
+
+                  {/* kjdsf */}
+                  {/* <div className="rounded-pill border-1 shadow-sm text-dark col-8"> */}
+                  <div className="col-8 " >
+                  <select
+                    id="select-box-assign-doctor"
+                    className="form-select rounded-pill border-1 shadow-sm text-dark "
+                    // style={{width:"100%"}}
+                    // aria-label="Default select example"
+                    
+                  >
+                    {/* <option>Select Doctor</option> */}
+
+                    {doctorsAllocated.map((i) => (
+                      <option key={i.doctorId} value={i.doctorId}>
+                        {i.firstName} {i.lastName}
+                      </option>
+                    ))}
+                  </select>
+                  </div>
+
+
+
+
+                </div>
+                
+        
+              </div>
+
+
+
+
+            </div>
+              {/* <div className="container row" style={{width:"100%",height:"150px" ,border : "2px solid red"}}>
+
+<div className="col-lg-6"style={{height:"10px" ,border : "2px solid green"}}>
+<div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                    AllocatedDrs. :
+                  </div>
+                  
+                  <div
+                    id="inputPassword"
+                    
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {doctorsAllocated.map((i)=>i.firstName)}
+                  </div>
+                </div>
+</div>
+<div className="col-lg-6"style={{height:"10px" ,border : "2px solid green"}}>
+<div className="row my-3" style={{width: "450px" }}>
+                  <div className="mt-2 col-4 custom-bold-color" >
+                    AllocatedDrs. :
+                  </div>
+                  
+                  <div
+                    id="inputPassword"
+                    
+                    className=" rounded-pill border-1 shadow-sm text-dark col-8 "
+                    
+                  >
+                    {doctorsAllocated.map((i)=>i.firstName)}
+                  </div>
+                </div>
+</div>
+
+              </div> */}
+            
+          </div>
         </div>
-        {/* <!-- user card ends --> */}
-      </div>
-      {/* <!-- Main col ends-  --> */}
-    </div>
+        
+      </div>      
+
+
     </div>
   );
 }

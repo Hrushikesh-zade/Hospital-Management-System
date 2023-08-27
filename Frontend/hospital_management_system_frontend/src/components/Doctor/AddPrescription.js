@@ -2,15 +2,21 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import patientService from "../../services/patient.service";
 import doctorService from "../../services/doctorService";
+import { Badge } from "react-bootstrap";
+import profilePic from "../../images/user_icon.png";
+import "../../css/customProfile.css";
+import HeaderNavbar from "../General/HeaderNavbar";
+
 const AddPrescription = () => {
   const navigate = useNavigate();
   const { doc_id, pat_id } = useParams();
   const [doctorList, setDoctorList] = useState([]);
   const [edited, setEdited] = useState(false);
-  const [doctor, setDoctor] = useState(0);
+  const [doctor, setDoctor] = useState({});
+  const [doctorId, setDoctorId] = useState(0);
   const [doctorsAllocated, setDoctorsAllocated] = useState([]);
 
- // let nav_url = "/doctors/" + doc_id;
+  // let nav_url = "/doctors/" + doc_id;
 
   const [addpatient, setaddPatient] = useState({
     firstName: "",
@@ -25,13 +31,14 @@ const AddPrescription = () => {
     contactNo: "",
     prescription: "",
     gender: "",
-    status: "ACTIVE"
+    status: "ACTIVE",
   });
 
   useEffect(() => {
     getPatientDetail(pat_id);
     getAllDoctors();
     getDoctorsList(pat_id);
+    getDoctorsInfo(doc_id);
   }, []);
 
   function getAllDoctors() {
@@ -53,7 +60,7 @@ const AddPrescription = () => {
         console.log(error + "error occured");
       });
 
-   // nav_url = nav_url + doc_id;
+    // nav_url = nav_url + doc_id;
   }
 
   function saveDoctor(patient_id, doctor_id) {
@@ -96,139 +103,257 @@ const AddPrescription = () => {
       });
   }
 
+  function getDoctorsInfo(docs_id) {
+    doctorService
+      .getDoctorInfo(docs_id)
+      .then((resp) => {
+        console.log("**********");
+        console.log(resp.data);
+        setDoctor(resp.data);
+      })
+      .catch((err) => {
+        console.log("error " + err);
+      });
+  }
+
   function savePatientDetails() {
     if (edited) {
       saveThePatient();
     }
-    if (doctor > 0) {
-      saveDoctor(pat_id, doctor);
+    if (doctorId > 0) {
+      saveDoctor(pat_id, doctorId);
     }
     navigate(`/doctors/${doc_id}`);
   }
 
   return (
     <div>
-      <label>Enter firstname</label>
-      <input
-        value={addpatient.firstName}
-        onChange={(e) => handleChange("firstName", e.target.value)}
-      />
-      <br />
-      <label>Enter lastname</label>
-      <input
-        value={addpatient.lastName}
-        onChange={(e) => handleChange("lastName", e.target.value)}
-      />
-      <br />
-      <label>Enter email</label>
-      <input
-        value={addpatient.email}
-        onChange={(e) => handleChange("email", e.target.value)}
-      />
-      <br />
-      <label>Enter bloodgrpoup</label>
-      <input
-        value={addpatient.bloodGroup}
-        onChange={(e) => handleChange("bloodGroup", e.target.value)}
-      />
-      <br />
-      <label>Enter phone_no</label>
-      <input
-        value={addpatient.contactNo}
-        onChange={(e) => handleChange("contactNo", e.target.value)}
-      />
-      <br />
-      <label>Enter payStatus</label>
-      <input
-        value={addpatient.paymentStatus}
-        onChange={(e) => handleChange("paymentStatus", e.target.value)}
-        readOnly
-      />
-      <br />
-      <label>Enter DOB</label>
-      <input
-        type="date"
-        value={addpatient.dob}
-        onChange={(e) => handleChange("dob", e.target.value)}
-      />
-      <br />
-      <label>Enter Disease</label>
-      <input
-        type="text"
-        value={addpatient.disease}
-        onChange={(e) => handleChange("disease", e.target.value)}
-      />
-      <br />
-      <label>Enter prescription</label>
-      <textarea
-        value={addpatient.prescription}
-        onChange={(e) => handleChange("prescription", e.target.value)}
-      />
-      <br />
-      <label>Enter Gender</label>
-      <input
-        type="text"
-        value={addpatient.gender}
-        onChange={(e) => handleChange("gender", e.target.value)}
-      />
-      <br />
-      {/* <label>Enter Bed_Alloted</label>
-      <input
-        value={addpatient.Bed_Alloted}
-        onChange={(e) => handleChange("Bed_Alloted", e.target.value)}
-      />
-      <br /> */}
-      <label>Enter ward_id</label>
-      <input
-        value={addpatient.wardId}
-        onChange={(e) => handleChange("wardId", e.target.value)}
-      />
-      {/* <br />
-      <label>Enter Doct_Alloted</label>
-      <input
-        value={addpatient.Doct_Alloted}
-        onChange={(e) => handleChange("Doct_Alloted", e.target.value)}
-      /> */}
-      <br />
-      <label>Enter Date_Of_Admission</label>
-      <input
-        type="date"
-        value={addpatient.dateOfAdmission}
-        onChange={(e) => handleChange("dateOfAdmission", e.target.value)}
-      />
-      <br />
-      <br />
-      Doctors Allocated are:
-      {doctorsAllocated.map((i) => (
-        <h3 key={i.doctorId}>{i.firstName} {i.lastName}</h3>
-      ))}
-      <br />
-      <br />
-      <label>Enter Doct_Alloted - list options - send id to backend</label>
-      <select
-        className="form-select"
-        aria-label="Default select example"
-        value={addpatient.doctorId}
-        onChange={(e) => setDoctor(e.target.value)}
-      >
-        <option>Open this select menu</option>
+      <HeaderNavbar firstName={doctor.firstName} lastName={doctor.lastName} sid={doctor.doctorId} role={doctor.role} emailId={doctor.email} ></HeaderNavbar>
 
-        {doctorList.map((i) => (
-          <option key={i.doctorId} value={i.doctorId}>
-            {i.firstName} {i.lastName}
-          </option>
-        ))}
-      </select>
-      <br />
-      <br />
-      <br />
-      <button className="btn btn-primary" onClick={savePatientDetails}>
-        {" "}
-        submit details
-      </button>
-      <Link to={`/doctors/${doc_id}`} className="btn btn-secondary">
-        Back to List
-      </Link>
+      {/* start  hrushi */}
+      <div className="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
+        <div className="row justify-content-center">
+          <div className="col-md-6" style={{ width: "100%" }}>
+            <div className="card custom-card">
+              <div
+                className="card-header custom-header"
+                style={{ width: "100%" }}
+              >
+                <h4 style={{ color: "white" }}>Add Prescription</h4>
+              </div>
+              <div className="card-body row">
+                {/* <form> */}
+                <div className="form-group col-md-6 mt-2">
+                  <label>First Name</label>
+                  <input
+                    id="doctor-pat-firstName-box"
+                    type="text"
+                    className="form-control mt-1 "
+                    value={addpatient.firstName}
+                    readOnly
+                  />
+                </div>
+                <div className="form-group col-md-6 mt-2">
+                  <label>Last Name</label>
+                  <input
+                    id="doctor-pat-lastName-box"
+                    type="text"
+                    className="form-control mt-1 "
+                    value={addpatient.lastName}
+                    readOnly
+                  />
+                </div>
+                <div className="form-group col-md-6 mt-2">
+                  <label>Email</label>
+                  <input
+                    id="doctor-pat-email"
+                    type="email"
+                    className="form-control mt-1 "
+                    value={addpatient.email}
+                    readOnly
+                  />
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <label>Phone No</label>
+                  <input
+                    id="doctor-pat-phno"
+                    type="number"
+                    className="form-control mt-1 "
+                    value={addpatient.contactNo}
+                    readOnly
+                  />
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <label>Date Of Birth</label>
+                  <input
+                    id="doctor-pat-date-dob"
+                    type="date"
+                    className="form-control mt-1 "
+                    value={addpatient.dob}
+                    readOnly
+                  />
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <label>Date Of Addmission</label>
+                  <input
+                    id="doctor-pat-date-doa"
+                    type="date"
+                    className="form-control mt-1 "
+                    value={addpatient.dateOfAdmission}
+                    readOnly
+                  />
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <label>Gender</label>
+                  <input
+                    id="doctor-ward-id"
+                    className="form-control mt-1  "
+                    value={addpatient.gender}
+                    readOnly
+                  />
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <label>Payment Status</label>
+                  <input
+                    id="doctor-pat-paystatus"
+                    className="form-control mt-1  "
+                    value={addpatient.paymentStatus}
+                    readOnly
+                  />
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <label>Ward Id</label>
+                  <input
+                    id="doctor-ward-id"
+                    className="form-control mt-1  "
+                    value={addpatient.wardId}
+                    readOnly
+                  />
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <label>Blood Group</label>
+                  <input
+                    id="doctor-p-bloodgroup"
+                    className="form-control mt-1 "
+                    value={addpatient.bloodGroup}
+                    readOnly
+                  />
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <label> Already Allocated Doctor</label>
+                  <select
+                    id="select-box-assign-doctor"
+                    className="form-select"
+                    aria-label="Default select example"
+                  >
+                    {/* <option>Already Allocated Doctor</option> */}
+                    {doctorsAllocated.map((i) => (
+                      <option key={i.doctorId}>
+                        {i.firstName} {i.lastName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+
+                <div className="form-group col-md-6 mt-2">
+                  <label> Assign Additional Doctor</label>
+                  <select
+                    id="select-box-assign-doctor"
+                    className="form-select"
+                    aria-label="Default select example"
+                    value={addpatient.doctorId}
+                    onChange={(e) => setDoctorId(e.target.value)}
+                  >
+                    <option>Select Doctor</option>
+
+                    {doctorList.map((i) => (
+                      <option key={i.doctorId} value={i.doctorId}>
+                        {i.firstName} {i.lastName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* <div className="form-group mt-2">
+                  <label>Enter Gender </label>
+                  <select
+                    id="admin-editEmployee-Gender-box"
+                    className="form-select"
+                    aria-label="Default select example"
+                    value={addpatient.gender}
+                    onChange={(e) => handleChange("gender", e.target.value)}
+                  >
+                    <option>Select gender </option>
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                    <option value="OTHER">OTHER</option>
+                  </select>
+                </div> */}
+
+                <div className="form-group mt-2">
+                  <label>Enter Diseases and Symptoms</label>
+                  <textarea
+                    id="doctor-pat-disease-box"
+                    type="text"
+                    className="form-control mt-1 "
+                    value={addpatient.disease}
+                    onChange={(e) => handleChange("disease", e.target.value)}
+                  />
+                </div>
+
+                <div className="form-group mt-2">
+                  <label>Enter Prescription</label>
+                  <textarea
+                    id="doctor-pat-prescription-box"
+                    type="text"
+                    className="form-control mt-1 "
+                    value={addpatient.prescription}
+                    onChange={(e) =>
+                      handleChange("prescription", e.target.value)
+                    }
+                  />
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <button
+                    type="submit"
+                    id="admin-editEmployee-submitButton-box"
+                    className="btn btn-primary custom-button custom-spacing custom-spacing-button"
+                    onClick={savePatientDetails}
+                  >
+                    Submit
+                  </button>
+                </div>
+
+                <div className="form-group col-md-6 mt-2">
+                  <button
+                    id="admin-editEmployee-backButton-box"
+                    className="btn btn-secondary  custom-spacing custom-spacing-button"
+                    onClick={() => {
+                      navigate(-1);
+                    }}
+                  >
+                    Go Back
+                  </button>
+                </div>
+
+                <div></div>
+
+                {/* </form> */}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
