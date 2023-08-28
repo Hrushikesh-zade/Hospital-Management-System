@@ -24,6 +24,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 
 
@@ -32,6 +33,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+
 public class Patient {
 
 	@Id
@@ -82,6 +84,13 @@ public class Patient {
 	
 	public void removeDoctor(Doctor d) {
 		doctors.remove(d);
+	}
+
+	@Override
+	public String toString() {
+		return "Patient [patientId=" + patientId + ", dateOfAdmission=" + dateOfAdmission + ", bloodGroup=" + bloodGroup
+				+ ", disease=" + disease + ", paymentStatus=" + paymentStatus + ", prescription=" + prescription
+				+ ", user=" + user +  "]";
 	}
 
 	

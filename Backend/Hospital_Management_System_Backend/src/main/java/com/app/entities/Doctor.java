@@ -22,12 +22,14 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "doctors")
 @Getter
 @Setter
 @NoArgsConstructor
+
 public class Doctor {
 	
 	
@@ -65,6 +67,11 @@ public class Doctor {
 	public Doctor(double charges) {
 		super();
 		this.charges = charges;
+	}
+
+	@Override
+	public String toString() {
+		return "Doctor [doctorId=" + doctorId + ", charges=" + charges + ", employee=" + employee + "]";
 	}
 	
 	
